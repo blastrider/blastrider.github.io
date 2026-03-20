@@ -5,8 +5,8 @@ template = "index.html"
 
 [extra.hero]
 eyebrow = "Freelance infrastructure & Rust"
-title = "Sysadmin senior & développeur Rust — j'audite et automatise vos infrastructures Linux"
-lead = "J'interviens pour identifier vos points de fragilité, réduire le travail manuel et fiabiliser vos environnements Linux. Audit d'existant, automatisation ciblée, chaînes CI/CD plus robustes et outils internes en Rust quand le shell ne suffit plus."
+title = "Je fiabilise vos serveurs pour réduire les pannes et accélérer vos équipes"
+lead = "Les incidents techniques et les opérations manuelles ralentissent votre croissance et coûtent cher. J'identifie les risques cachés de votre informatique et mets en place des solutions durables. Votre équipe technique gagne du temps, et votre entreprise gagne en sécurité."
 primary_cta = "Demander un audit — réponse sous 48h"
 secondary_cta = "Réserver un appel de 30 min"
 secondary_cta_url = "https://calendly.com/guimaxali/discover-sysadmin"
@@ -22,8 +22,8 @@ title = "Des interventions utiles aux équipes qui n'ont pas le temps d'improvis
 intro = "Je cible les points qui font perdre du temps ou augmentent le risque : dette d'exploitation, procédures fragiles, observabilité insuffisante, déploiements artisanaux et outillage interne qui ne passe plus à l'échelle."
 
 [[extra.offers.items]]
-name = "Audit d'infrastructure Linux"
-description = "Revue d'architecture, de sécurité opérationnelle et de procédures d'exploitation pour savoir où agir d'abord."
+name = "Audit technique : anticiper les pannes"
+description = "Détection des failles, des goulots d'étranglement et des coûts inutiles. Vous obtenez un plan d'action clair pour sécuriser la continuité de votre activité."
 deliverables = [
   "Cartographie rapide de l'existant et des dépendances critiques",
   "Liste priorisée des risques, quick wins et chantiers structurants",
@@ -31,8 +31,8 @@ deliverables = [
 ]
 
 [[extra.offers.items]]
-name = "Automatisation & fiabilisation"
-description = "Réduction du travail manuel répétitif avec des scripts, playbooks et pipelines plus sûrs."
+name = "Automatisation : supprimer le travail manuel"
+description = "Remplacement des tâches d'exploitation fastidieuses par des processus fiables. Vos équipes gagnent en productivité et le risque d'erreur humaine disparaît."
 deliverables = [
   "Automatisation de tâches d'exploitation et de déploiement",
   "Standardisation des environnements et réduction des écarts",
@@ -40,8 +40,8 @@ deliverables = [
 ]
 
 [[extra.offers.items]]
-name = "Tooling interne en Rust"
-description = "Quand il faut un binaire fiable, rapide et maintenable pour sortir des scripts fragiles."
+name = "Outils sur mesure : des logiciels incassables"
+description = "Développement d'applications robustes pour résoudre vos contraintes techniques complexes. Une solution extrêmement performante pour outiller solidement votre entreprise."
 deliverables = [
   "CLI internes pour l'exploitation et le support",
   "Services backend sobres pour besoins ciblés",
@@ -58,7 +58,7 @@ text = "Réseau, Linux, déploiement, observabilité, sécurité opérationnelle
 
 [[extra.credibility.highlights]]
 title = "Rust quand il apporte vraiment quelque chose"
-text = "Je ne remplace pas un script qui marche par idéologie. J'utilise Rust quand la robustesse, la distribution ou la maintenance long terme le justifient."
+text = "Je ne remplace pas un script qui marche par idéologie. J'utilise Rust quand la robustesse, la distribution ou la maintenance long terme le justify."
 
 [[extra.credibility.highlights]]
 title = "Recommandations actionnables"
@@ -69,7 +69,7 @@ title = "Posture freelance opérationnelle"
 text = "Intervention courte, communication directe, peu de friction et une préférence nette pour les solutions simples à opérer."
 
 [extra.contact]
-title = "Parlons de votre infra avant le prochain incident évitable"
+title = "Discutons de vos enjeux avant le prochain incident coûteux"
 intro = "Décrivez le contexte, les symptômes ou le chantier à débloquer. Réponse par email sous 48h ouvrées. Le formulaire ci-dessous utilise Formspree, sans backend applicatif."
 form_cta = "Envoyer la demande"
 form_note = "Remplacez l'URL Formspree dans config.toml par votre endpoint avant mise en production."
