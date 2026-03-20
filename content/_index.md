@@ -5,12 +5,12 @@ template = "index.html"
 
 [extra.hero]
 eyebrow = "Freelance infrastructure & Rust"
-title = "Je fiabilise vos serveurs pour réduire les pannes et accélérer vos équipes"
-lead = "Les incidents techniques et les opérations manuelles ralentissent votre croissance et coûtent cher. J'identifie les risques cachés de votre informatique et mets en place des solutions durables. Votre équipe technique gagne du temps, et votre entreprise gagne en sécurité."
+title = "Je sécurise vos serveurs pour éviter les pannes et la dépendance technique"
+lead = "Votre activité repose sur une informatique opaque ou gérée par une seule personne ? Je fiabilise votre infrastructure Linux pour prévenir les arrêts d'activité et la perte de données. Reprenez le contrôle de votre système, tout en faisant gagner un temps précieux à vos équipes et prestataires."
 primary_cta = "Demander un audit — réponse sous 48h"
 secondary_cta = "Réserver un appel de 30 min"
 secondary_cta_url = "https://calendly.com/guimaxali/discover-sysadmin"
-panel_text = "Mission courte ou accompagnement ciblé pour remettre à plat une infra, documenter les risques et sécuriser l'exploitation avant que la dette ne devienne un incident."
+panel_text = "Remise à plat d'infrastructures fragiles ou héritées. Je documente vos systèmes, lève la dépendance à un prestataire/salarié unique et préviens les incidents coûteux."
 points = [
   "Audit technique orienté risques, coûts d'exploitation et maintenabilité",
   "Automatisation pragmatique : provisioning, déploiement, supervision, sauvegardes",
@@ -18,25 +18,25 @@ points = [
 ]
 
 [extra.offers]
-title = "Des interventions utiles aux équipes qui n'ont pas le temps d'improviser en production"
-intro = "Je cible les points qui font perdre du temps ou augmentent le risque : dette d'exploitation, procédures fragiles, observabilité insuffisante, déploiements artisanaux et outillage interne qui ne passe plus à l'échelle."
+title = "Reprenez le contrôle de votre infrastructure informatique, sans angle mort"
+intro = "Gare aux serveurs qui plantent sans raison, au \"bus factor\" (une seule personne sait comment tout marche) et aux sauvegardes douteuses. J'élimine les risques de perte de données et donne de l'air à votre exploitation quotidienne."
 
 [[extra.offers.items]]
 name = "Audit technique : anticiper les pannes"
-description = "Détection des failles, des goulots d'étranglement et des coûts inutiles. Vous obtenez un plan d'action clair pour sécuriser la continuité de votre activité."
+description = "Réappropriation de l'existant (même si le créateur est parti) et détection des failles critiques. Vous obtenez un plan d'action compréhensible pour blinder la continuité de votre activité."
 deliverables = [
   "Cartographie rapide de l'existant et des dépendances critiques",
-  "Liste priorisée des risques, quick wins et chantiers structurants",
-  "Restitution claire pour direction technique ou équipe ops"
+  "Liste priorisée des risques d'arrêt, de perte de données et chantiers structurants",
+  "Restitution claire pour la direction et feuille de route technique"
 ]
 
 [[extra.offers.items]]
-name = "Automatisation : supprimer le travail manuel"
-description = "Remplacement des tâches d'exploitation fastidieuses par des processus fiables. Vos équipes gagnent en productivité et le risque d'erreur humaine disparaît."
+name = "Automatisation : supprimer le bricolage manuel"
+description = "Remplacement des processus manuels opaques par des systèmes standardisés et documentés. Le fonctionnement de vos serveurs devient transparent et pérenne, même en cas de changement d'équipe."
 deliverables = [
   "Automatisation de tâches d'exploitation et de déploiement",
   "Standardisation des environnements et réduction des écarts",
-  "Amélioration de la supervision, des sauvegardes et de la reprise"
+  "Amélioration de la supervision, des sauvegardes (backups certifiés) et reprise"
 ]
 
 [[extra.offers.items]]
@@ -49,20 +49,20 @@ deliverables = [
 ]
 
 [extra.credibility]
-title = "Une approche senior, utile pour les contextes sensibles et les environnements déjà en tension"
-intro = "Je travaille avec une logique d'exploitation réelle : lisibilité des procédures, réduction du facteur humain, robustesse des déploiements et arbitrages techniques défendables."
+title = "Une expertise senior pour ne plus jouer à l'aveugle avec vos données"
+intro = "Que vous ayez une équipe tech à épauler, ou que vous soyez gérant et dépendant d'une boîte noire technique, je vous ramène des processus robustes et des choix pragmatiques."
 
 [[extra.credibility.highlights]]
 title = "Vision système complète"
-text = "Réseau, Linux, déploiement, observabilité, sécurité opérationnelle et outillage : les décisions sont prises en considérant l'ensemble du cycle d'exploitation."
+text = "Réseau, Linux, déploiement, observabilité et sécurité : j'assure l'intégrité de vos flux et je fiabilise la sauvegarde de votre capital de données."
 
 [[extra.credibility.highlights]]
-title = "Rust quand il apporte vraiment quelque chose"
-text = "Je ne remplace pas un script qui marche par idéologie. J'utilise Rust quand la robustesse, la distribution ou la maintenance long terme le justify."
+title = "Rust quand la sécurité l'exige"
+text = "Je ne remplace pas un script qui marche. J'utilise Rust quand il vous faut un outil interne performant, fiable sur la durée et incapable de s'effondrer silencieusement."
 
 [[extra.credibility.highlights]]
-title = "Recommandations actionnables"
-text = "Chaque audit débouche sur des actions priorisées, avec arbitrage entre impact, effort, dépendances et exposition au risque."
+title = "Recommandations concrètes"
+text = "Fini le blabla hors de prix : chaque audit propose des décisions simples qui tiennent compte de votre budget, du risque financier et du maintien en condition."
 
 [[extra.credibility.highlights]]
 title = "Posture freelance opérationnelle"
