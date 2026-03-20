@@ -1,5 +1,5 @@
 # /home/max/Documents/Projets/Rust/site-perso-zola/zola.toml
-base_url = "https://ferrix.fr"
+base_url = "https://blastrider.github.io"
 title = "Ferrix — Sysadmin senior & développeur Rust"
 description = "Audit, automatisation et fiabilisation d'infrastructures Linux par un sysadmin senior et développeur Rust."
 default_language = "fr"
