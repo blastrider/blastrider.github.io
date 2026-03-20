@@ -3,6 +3,7 @@
 {% block content %}
 {% set hero = section.extra.hero %}
 {% set offers = section.extra.offers %}
+{% set targets = section.extra.targets %}
 {% set credibility = section.extra.credibility %}
 {% set contact = section.extra.contact %}
 
@@ -73,6 +74,32 @@
           <li>{{ item }}</li>
           {% endfor %}
         </ul>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="cibles" class="section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="eyebrow">Pour qui ?</p>
+      <h2>{{ targets.title }}</h2>
+    </div>
+
+    <div class="offer-grid">
+      {% for item in targets.items %}
+      <article class="card offer-card reveal">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.subtitle }}</p>
+        <ul>
+          {% for bullet in item.bullets %}
+          <li>{{ bullet }}</li>
+          {% endfor %}
+        </ul>
+        <div style="margin-top: 1.5rem;">
+            <a class="button button-secondary" style="width: 100%; padding: 0.6rem; font-size: 0.9rem;" href="{{ hero.secondary_cta_url }}" title="Prendre rendez-vous sur Calendly" target="_blank" rel="noopener noreferrer">{{ item.cta }}</a>
+        </div>
       </article>
       {% endfor %}
     </div>

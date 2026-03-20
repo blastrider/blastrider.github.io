@@ -48,6 +48,39 @@ deliverables = [
   "Chaîne de build, packaging et livraison adaptée au contexte"
 ]
 
+[extra.targets]
+title = "À qui s'adressent mes interventions ?"
+
+[[extra.targets.items]]
+title = "Votre informatique est devenue une boîte noire ?"
+subtitle = "Reprenez le contrôle de vos serveurs pour supprimer le risque d'arrêt d'activité et sécuriser votre entreprise."
+bullets = [
+  "Dépendance à un prestataire unique → Je documente votre installation pour vous rendre votre indépendance.",
+  "Sauvegardes douteuses et jamais testées → Je certifie qu'aucun de vos fichiers ne disparaîtra.",
+  "Coûts de serveurs physiques trop lourds → Je rassemble et consolide votre matériel pour faire fondre vos factures."
+]
+cta = "Demander un diagnostic"
+
+[[extra.targets.items]]
+title = "Déploiements douloureux et dette d'exploitation accumulée ?"
+subtitle = "Stabilisez vos environnements et automatisez pour soutenir votre rythme de croissance, sans embauche à plein temps."
+bullets = [
+  "Mises en production manuelles risquées → J'automatise vos pipelines CI/CD pour des déploiements fiables.",
+  "Environnements de développement instables → J'isole votre dev/staging/prod avec des snapshots pour des rollbacks immédiats.",
+  "Manque de bande passante interne → J'interviens en chirurgie ciblée pour débloquer votre équipe CTO."
+]
+cta = "Réserver un appel technique"
+
+[[extra.targets.items]]
+title = "Sous l'eau face aux tâches manuelles d'exploitation ?"
+subtitle = "Déléguez le tooling Rust et l'automatisation d'infrastructure pour vous recentrer sur votre cœur d'exploitation."
+bullets = [
+  "Procédures d'exploitation fragiles → J'écris vos playbooks Ansible pour standardiser et garantir la pérennité des instances.",
+  "Scripts bash limités et lents → Je code des binaires Rust robustes pour votre outillage interne.",
+  "Hausse toxique des licences VMware Broadcom → J'assure la migration complexe vers Proxmox et sa gestion en prod."
+]
+cta = "Discuter d'un renfort ponctuel"
+
 [extra.credibility]
 title = "Une expertise senior pour ne plus jouer à l'aveugle avec vos données"
 intro = "Que vous ayez une équipe tech à épauler, ou que vous soyez gérant et dépendant d'une boîte noire technique, je vous ramène des processus robustes et des choix pragmatiques."
