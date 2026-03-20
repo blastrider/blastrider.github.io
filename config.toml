@@ -1,0 +1,20 @@
+# /home/max/Documents/Projets/Rust/site-perso-zola/config.toml
+base_url = "https://ferrix.fr"
+title = "Ferrix — Sysadmin senior & développeur Rust"
+description = "Audit, automatisation et fiabilisation d'infrastructures Linux par un sysadmin senior et développeur Rust."
+default_language = "fr"
+compile_sass = false
+build_search_index = false
+generate_feeds = false
+generate_sitemap = true
+generate_robots_txt = true
+minify_html = true
+
+[markdown]
+smart_punctuation = true
+
+[extra]
+site_name = "Ferrix"
+contact_email = "contact@ferrix.fr"
+formspree_endpoint = "https://formspree.io/f/your-form-id"
+legal_name = "Ferrix"
