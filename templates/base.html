@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page and page.title %}{{ page.title }} | {{ config.title }}{% elif section and section.title %}{{ section.title }} | {{ config.title }}{% else %}{{ config.title }}{% endif %}</title>
+  <title>{% block title %}Ferrix — Sysadmin senior & développeur Rust{% endblock %}</title>
   <meta name="description" content="{% if page and page.description %}{{ page.description }}{% elif section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
   <meta name="author" content="{{ config.extra.legal_name | default(value=config.title) }}">
   <meta name="robots" content="index,follow">
@@ -18,6 +18,22 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page and page.title %}{{ page.title }}{% elif section and section.title %}{{ section.title }}{% else %}{{ config.title }}{% endif %}">
   <meta name="twitter:description" content="{% if page and page.description %}{{ page.description }}{% elif section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Ferrix",
+    "url": "https://ferrix.fr",
+    "description": "Sysadmin senior freelance — audit infrastructure Linux, automatisation, virtualisation Proxmox/VMware, tooling Rust.",
+    "founder": {
+      "@type": "Person",
+      "name": "Maxime",
+      "jobTitle": "Sysadmin senior & développeur Rust"
+    },
+    "areaServed": "FR",
+    "serviceType": ["Audit infrastructure Linux", "Automatisation système", "Virtualisation Proxmox", "Migration VMware", "Développement Rust"]
+  }
+  </script>
   <link rel="icon" href="{{ get_url(path='favicon.ico') }}" sizes="any">
   <link rel="icon" href="{{ get_url(path='favicon-192.png') }}" type="image/png">
   <link rel="apple-touch-icon" href="{{ get_url(path='apple-touch-icon.png') }}">
