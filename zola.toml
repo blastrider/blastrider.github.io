@@ -15,6 +15,6 @@ smart_punctuation = true
 
 [extra]
 site_name = "Ferrix"
-contact_email = "contact@ferrix.fr"
+contact_email = "contact-ferrix@proton.me"
 formspree_endpoint = "https://formspree.io/f/xwvrzvoo"
 legal_name = "Ferrix"
