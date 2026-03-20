@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-{# /home/max/Documents/Projets/Rust/site-perso-zola/templates/index.html #}
+{% extends "base.html" %}{# /home/max/Documents/Projets/Rust/site-perso-zola/templates/index.html #}
 
 {% block content %}
 {% set hero = section.extra.hero %}
@@ -9,10 +8,16 @@
 
 <section id="hero" class="hero section">
   <div class="container hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow">{{ hero.eyebrow }}</p>
+    <div class="hero-copy reveal">
+      <p class="eyebrow">Ferrix / {{ hero.eyebrow }}</p>
       <h1>{{ hero.title }}</h1>
       <p class="lead">{{ hero.lead }}</p>
+
+      <div class="hero-meta">
+        <span>Audit ciblé</span>
+        <span>Automatisation Linux</span>
+        <span>Tooling Rust</span>
+      </div>
 
       <div class="hero-actions">
         <a class="button button-primary" href="#contact">{{ hero.primary_cta }}</a>
@@ -26,7 +31,8 @@
       </ul>
     </div>
 
-    <aside class="hero-panel" aria-label="Positionnement">
+    <aside class="hero-panel reveal" aria-label="Positionnement">
+      <div class="panel-glow"></div>
       <p class="panel-kicker">Intervention type</p>
       <h2>Audit rapide, diagnostic concret, plan d'action priorisé.</h2>
       <p>{{ hero.panel_text }}</p>
@@ -50,7 +56,7 @@
 
 <section id="offres" class="section section-alt">
   <div class="container">
-    <div class="section-heading">
+    <div class="section-heading reveal">
       <p class="eyebrow">Offres</p>
       <h2>{{ offers.title }}</h2>
       <p>{{ offers.intro }}</p>
@@ -58,7 +64,7 @@
 
     <div class="offer-grid">
       {% for offer in offers.items %}
-      <article class="card offer-card">
+      <article class="card offer-card reveal">
         <p class="card-index">0{{ loop.index }}</p>
         <h3>{{ offer.name }}</h3>
         <p>{{ offer.description }}</p>
@@ -75,7 +81,7 @@
 
 <section id="credibilite" class="section">
   <div class="container credibility-grid">
-    <div class="section-heading">
+    <div class="section-heading reveal">
       <p class="eyebrow">Crédibilité</p>
       <h2>{{ credibility.title }}</h2>
       <p>{{ credibility.intro }}</p>
@@ -83,7 +89,7 @@
 
     <div class="credibility-stack">
       {% for item in credibility.highlights %}
-      <article class="card credibility-card">
+      <article class="card credibility-card reveal">
         <h3>{{ item.title }}</h3>
         <p>{{ item.text }}</p>
       </article>
@@ -94,7 +100,7 @@
 
 <section id="contact" class="section section-contact">
   <div class="container contact-grid">
-    <div class="section-heading">
+    <div class="section-heading reveal">
       <p class="eyebrow">Contact</p>
       <h2>{{ contact.title }}</h2>
       <p>{{ contact.intro }}</p>
@@ -105,7 +111,7 @@
       <p class="contact-mail">Email direct : <a href="mailto:{{ config.extra.contact_email }}">{{ config.extra.contact_email }}</a></p>
     </div>
 
-    <form class="card contact-form" action="{{ config.extra.formspree_endpoint }}" method="POST">
+    <form class="card contact-form reveal" action="{{ config.extra.formspree_endpoint }}" method="POST">
       <input type="hidden" name="_subject" value="Nouvelle demande depuis ferrix.fr">
       <label for="name">Nom</label>
       <input id="name" name="name" type="text" placeholder="Votre nom" required>

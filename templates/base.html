@@ -4,20 +4,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if section and section.title %}{{ section.title }} | {{ config.title }}{% else %}{{ config.title }}{% endif %}</title>
-  <meta name="description" content="{% if section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
+  <title>{% if page and page.title %}{{ page.title }} | {{ config.title }}{% elif section and section.title %}{{ section.title }} | {{ config.title }}{% else %}{{ config.title }}{% endif %}</title>
+  <meta name="description" content="{% if page and page.description %}{{ page.description }}{% elif section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
   <meta name="author" content="{{ config.extra.legal_name | default(value=config.title) }}">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="{{ current_url | default(value=config.base_url) }}">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ config.extra.site_name | default(value=config.title) }}">
-  <meta property="og:title" content="{% if section and section.title %}{{ section.title }}{% else %}{{ config.title }}{% endif %}">
-  <meta property="og:description" content="{% if section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
+  <meta property="og:title" content="{% if page and page.title %}{{ page.title }}{% elif section and section.title %}{{ section.title }}{% else %}{{ config.title }}{% endif %}">
+  <meta property="og:description" content="{% if page and page.description %}{{ page.description }}{% elif section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
   <meta property="og:url" content="{{ current_url | default(value=config.base_url) }}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{% if section and section.title %}{{ section.title }}{% else %}{{ config.title }}{% endif %}">
-  <meta name="twitter:description" content="{% if section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
+  <meta name="twitter:title" content="{% if page and page.title %}{{ page.title }}{% elif section and section.title %}{{ section.title }}{% else %}{{ config.title }}{% endif %}">
+  <meta name="twitter:description" content="{% if page and page.description %}{{ page.description }}{% elif section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
 </head>
 <body id="hero">
@@ -56,5 +59,13 @@
       <a href="mailto:{{ config.extra.contact_email }}">{{ config.extra.contact_email }}</a>
     </div>
   </footer>
+  <script>
+    const io=new IntersectionObserver((entries)=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add("is-visible")),{threshold:.14});
+    document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+    const header=document.querySelector(".site-header");
+    const menu=document.querySelector(".nav-toggle");
+    addEventListener("scroll",()=>header.classList.toggle("is-scrolled",scrollY>12),{passive:true});
+    document.querySelectorAll('.site-nav a').forEach(a=>a.addEventListener("click",()=>menu&&menu.removeAttribute("open")));
+  </script>
 </body>
 </html>
