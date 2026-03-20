@@ -8,8 +8,8 @@ eyebrow = "Freelance infrastructure & Rust"
 title = "Sysadmin senior & développeur Rust — j'audite et automatise vos infrastructures Linux"
 lead = "J'interviens pour identifier vos points de fragilité, réduire le travail manuel et fiabiliser vos environnements Linux. Audit d'existant, automatisation ciblée, chaînes CI/CD plus robustes et outils internes en Rust quand le shell ne suffit plus."
 primary_cta = "Demander un audit — réponse sous 48h"
-secondary_cta = "Réserver un appel 20 min"
-secondary_cta_url = "mailto:contact@ferrix.fr?subject=Reservation%20appel%2020%20min"
+secondary_cta = "Réserver un appel de 30 min"
+secondary_cta_url = "https://calendly.com/guimaxali/discover-sysadmin"
 panel_text = "Mission courte ou accompagnement ciblé pour remettre à plat une infra, documenter les risques et sécuriser l'exploitation avant que la dette ne devienne un incident."
 points = [
   "Audit technique orienté risques, coûts d'exploitation et maintenabilité",

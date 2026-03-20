@@ -18,6 +18,9 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page and page.title %}{{ page.title }}{% elif section and section.title %}{{ section.title }}{% else %}{{ config.title }}{% endif %}">
   <meta name="twitter:description" content="{% if page and page.description %}{{ page.description }}{% elif section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
+  <link rel="icon" href="{{ get_url(path='favicon.ico') }}" sizes="any">
+  <link rel="icon" href="{{ get_url(path='favicon-192.png') }}" type="image/png">
+  <link rel="apple-touch-icon" href="{{ get_url(path='apple-touch-icon.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -29,8 +32,7 @@
   <header class="site-header">
     <div class="container nav-shell">
       <a class="brand" href="#hero" aria-label="Retour en haut de page">
-        <span class="brand-mark">F</span>
-        <span class="brand-text">Ferrix</span>
+        <img src="{{ get_url(path='logo_FERRIX.svg') }}" alt="Ferrix" class="brand-logo" height="40">
       </a>
 
       <details class="nav-toggle">
