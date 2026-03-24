@@ -97,8 +97,8 @@
           <li>{{ bullet }}</li>
           {% endfor %}
         </ul>
-        <div style="margin-top: 1.5rem;">
-            <a class="button button-secondary" style="width: 100%; padding: 0.6rem; font-size: 0.9rem;" href="{{ hero.secondary_cta_url }}" title="Prendre rendez-vous sur Calendly" target="_blank" rel="noopener noreferrer">{{ item.cta }}</a>
+        <div class="target-cta-wrapper">
+            <a class="button button-secondary target-cta" href="{{ hero.secondary_cta_url }}" title="Prendre rendez-vous sur Calendly" target="_blank" rel="noopener noreferrer">{{ item.cta }}</a>
         </div>
       </article>
       {% endfor %}
