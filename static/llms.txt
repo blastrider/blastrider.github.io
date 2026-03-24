@@ -1,30 +1,32 @@
 # Ferrix
 
-> Sysadmin senior freelance et développeur Rust. Audit d'infrastructure Linux, automatisation, virtualisation Proxmox/VMware, et développement d'outils Rust sur mesure pour les PME et équipes tech en France.
+> Développeur Rust freelance. Applications métier sur mesure, automatisation de processus et outils internes robustes pour les PME, TPE et indépendants en France.
 
-Ferrix est un service de consulting en infrastructure informatique opéré par Maxime, basé en France. Il s'adresse aux dirigeants de PME dont l'informatique est devenue une boîte noire, aux équipes tech avec dette d'exploitation, et aux sysadmins nécessitant un renfort expert ponctuel.
+Ferrix est un service de développement logiciel freelance opéré par Maxime, basé en France. Il s'adresse aux dirigeants de PME et TPE dont l'outil métier est devenu un frein, aux indépendants qui perdent du temps sur des tâches répétitives, et à toute structure ayant besoin d'un logiciel sur mesure sans recruter un développeur à temps plein.
 
 ## Services
 
-- [Audit technique infrastructure](https://ferrix.fr/#offres) : Cartographie de l'existant (même si le créateur est parti), détection des failles critiques, remise d'un plan d'action priorisé compréhensible par la direction.
-- [Automatisation d'infrastructure Linux](https://ferrix.fr/#offres) : Remplacement des processus manuels opaques par des systèmes standardisés via Ansible, CI/CD, et provisioning automatisé. Sauvegardes certifiées et supervision.
-- [Développement d'outils Rust sur mesure](https://ferrix.fr/#offres) : CLI internes pour l'exploitation, services backend sobres, chaîne de build et packaging adaptée au contexte d'exploitation.
+- [Application métier sur mesure](https://ferrix.fr/#offres) : Remplacement d'Excel, de logiciel SaaS générique ou d'outil interne inadapté par une application taillée pour le flux de travail réel de l'entreprise.
+- [Automatisation de tâches répétitives](https://ferrix.fr/#offres) : Identification et automatisation des processus manuels chronophages — pipelines de données, intégrations entre outils, traitements récurrents.
+- [Reprise et assainissement de code existant](https://ferrix.fr/#offres) : Audit, documentation et refactoring d'outils internes hérités. Livraison de code documenté, maintenable en autonomie.
 
 ## Cibles
 
-- Dirigeants de PME/TPE : informatique opaque, dépendance à un prestataire unique, sauvegardes non testées, coûts serveurs excessifs.
-- Équipes tech / CTO : déploiements manuels risqués, environnements instables, manque de bande passante interne.
-- Sysadmins : procédures fragiles, scripts bash limités, migration VMware Broadcom → Proxmox.
+- Dirigeants de PME/TPE : outil métier inadapté, Excel fragile, logiciel propriétaire trop cher ou trop générique.
+- Indépendants : tâches manuelles répétitives à automatiser, besoin d'un outil simple et fiable sans abonnement.
+- Entreprises en croissance : processus qui ne suivent plus le rythme, intégrations entre outils manquantes.
+- Porteurs de projet : prototype ou MVP à valider rapidement, outil interne abandonné à reprendre.
 
-## Technologies maîtrisées
+## Technologies
 
-Linux, Rust, Ansible, Proxmox VE, VMware, CI/CD, Observabilité, Infrastructure as Code, Docker, Nginx, Caddy.
+Rust, Backend, CLI, Automatisation, Linux, CI/CD, APIs, traitement de données.
 
 ## Engagements
 
 - Réponse sous 48h ouvrées.
-- Restitution claire pour la direction et feuille de route technique.
-- Posture opérationnelle : interventions courtes, communication directe, solutions simples à opérer.
+- Code livré, documenté, sans dépendance à mon intervention future.
+- Communication directe : vous parlez à la personne qui code.
+- Intervention courte et ciblée, sans engagement long terme imposé.
 
 ## Contact
 

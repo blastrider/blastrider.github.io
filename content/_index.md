@@ -1,111 +1,111 @@
 +++
-title = "Ferrix — Sysadmin senior & développeur Rust"
-description = "Sysadmin senior & développeur Rust : audit d'infrastructure Linux, automatisation, durcissement et fiabilisation."
+title = "Ferrix — Développeur Rust freelance pour PME, TPE et indépendants"
+description = "Développeur Rust freelance : applications sur mesure, outils métier et automatisation pour les PME, TPE et indépendants en France. Code livré, documenté, sans dépendance."
 template = "index.html"
 
 [extra.hero]
-eyebrow = "Freelance infrastructure & Rust"
-title = "Je sécurise vos serveurs pour éviter les pannes et la dépendance technique"
-lead = "Votre activité repose sur une informatique opaque ou gérée par une seule personne ? Je fiabilise votre infrastructure Linux pour prévenir les arrêts d'activité et la perte de données. Reprenez le contrôle de votre système, tout en faisant gagner un temps précieux à vos équipes et prestataires."
-primary_cta = "Demander un audit — réponse sous 48h"
+eyebrow = "Développeur Rust freelance · PME, TPE & Indépendants"
+title = "Des logiciels sur mesure qui durent, sans dette technique ni dépendance"
+lead = "Votre activité tourne sur un outil bricolé, un fichier Excel en bout de course ou un logiciel propriétaire trop cher ? Je conçois des applications légères et fiables, adaptées exactement à votre métier — que vous soyez gérant de PME, TPE ou indépendant. Sans abonnement imposé, sans code spaghetti, sans prestataire indispensable."
+primary_cta = "Décrire mon besoin — réponse sous 48h"
 secondary_cta = "Réserver un appel de 30 min"
 secondary_cta_url = "https://calendly.com/guimaxali/discover-sysadmin"
-panel_text = "Remise à plat d'infrastructures fragiles ou héritées. Je documente vos systèmes, lève la dépendance à un prestataire/salarié unique et préviens les incidents coûteux."
+panel_text = "Du logiciel utile, pas du logiciel impressionnant. Je livre des outils que votre équipe adopte en une journée, que vous pouvez reprendre sans moi, et qui ne tombent pas en panne le vendredi soir."
 points = [
-  "Audit technique orienté risques, coûts d'exploitation et maintenabilité",
-  "Automatisation pragmatique : provisioning, déploiement, supervision, sauvegardes",
-  "Développement Rust pour utilitaires d'exploitation, tooling interne et services sobres"
+  "Applications métier sur mesure : remplacez l'Excel fragile ou le logiciel trop générique",
+  "Outils internes Rust : CLI, automatisation, traitement de données — fiables en production",
+  "Code source livré, documenté, sans dépendance à mon intervention future"
 ]
 
 [extra.offers]
-title = "Reprenez le contrôle de votre infrastructure informatique, sans angle mort"
-intro = "Gare aux serveurs qui plantent sans raison, au \"bus factor\" (une seule personne sait comment tout marche) et aux sauvegardes douteuses. J'élimine les risques de perte de données et donne de l'air à votre exploitation quotidienne."
+title = "Ce que je construis concrètement pour votre entreprise"
+intro = "Pas de jargon, pas de promesses creuses. Chaque projet part d'un problème réel que vous avez aujourd'hui. Je livre un outil que vous utilisez dès la première semaine."
 
 [[extra.offers.items]]
-name = "Audit technique : anticiper les pannes"
-description = "Réappropriation de l'existant (même si le créateur est parti) et détection des failles critiques. Vous obtenez un plan d'action compréhensible pour blinder la continuité de votre activité."
+name = "Application métier sur mesure"
+description = "Votre processus unique mérite un outil unique. Je remplace le fichier Excel partagé, le logiciel SaaS trop cher ou l'outil générique inadapté par une application taillée pour votre façon de travailler."
 deliverables = [
-  "Cartographie rapide de l'existant et des dépendances critiques",
-  "Liste priorisée des risques d'arrêt, de perte de données et chantiers structurants",
-  "Restitution claire pour la direction et feuille de route technique"
+  "Analyse de votre flux de travail existant et des points de friction",
+  "Interface simple, utilisable sans formation par vos équipes",
+  "Livraison progressive : vous voyez l'outil évoluer, vous validez à chaque étape"
 ]
 
 [[extra.offers.items]]
-name = "Automatisation : supprimer le bricolage manuel"
-description = "Remplacement des processus manuels opaques par des systèmes standardisés et documentés. Le fonctionnement de vos serveurs devient transparent et pérenne, même en cas de changement d'équipe."
+name = "Automatisation de tâches répétitives"
+description = "Chaque heure passée sur une tâche manuelle répétitive est une heure perdue. Je l'automatise proprement, sans script fragile qui casse dès qu'on change un fichier."
 deliverables = [
-  "Automatisation de tâches d'exploitation et de déploiement",
-  "Standardisation des environnements et réduction des écarts",
-  "Amélioration de la supervision, des sauvegardes (backups certifiés) et reprise"
+  "Identification des tâches à automatiser en priorité (ROI maximal)",
+  "Outil robuste : gestion des erreurs, logs clairs, pas de surprises silencieuses",
+  "Documentation incluse pour que votre équipe le maintienne de façon autonome"
 ]
 
 [[extra.offers.items]]
-name = "Outils sur mesure : des logiciels incassables"
-description = "Développement d'applications robustes pour résoudre vos contraintes techniques complexes. Une solution extrêmement performante pour outiller solidement votre entreprise."
+name = "Reprise et assainissement de code existant"
+description = "Vous avez hérité d'un outil interne que personne ne comprend plus ? Je le reprends, je le documente et je le remets en état — ou je le refais proprement si c'est plus rentable."
 deliverables = [
-  "CLI internes pour l'exploitation et le support",
-  "Services backend sobres pour besoins ciblés",
-  "Chaîne de build, packaging et livraison adaptée au contexte"
+  "Audit du code existant : risques, dette technique, points de fragilité",
+  "Refactoring ciblé ou réécriture complète selon le diagnostic",
+  "Passation de compétences : vous restez maître de votre logiciel"
 ]
 
 [extra.targets]
-title = "À qui s'adressent mes interventions ?"
+title = "Pour qui est-ce que je travaille ?"
 
 [[extra.targets.items]]
-title = "Votre informatique est devenue une boîte noire ?"
-subtitle = "Reprenez le contrôle de vos serveurs pour supprimer le risque d'arrêt d'activité et sécuriser votre entreprise."
+title = "Vous gérez une PME/TPE et votre logiciel métier est devenu un frein"
+subtitle = "Reprenez le contrôle de vos outils pour arrêter de perdre du temps et de l'argent sur des processus manuels."
 bullets = [
-  "Dépendance à un prestataire unique → Je documente votre installation pour vous rendre votre indépendance.",
-  "Sauvegardes douteuses et jamais testées → Je certifie qu'aucun de vos fichiers ne disparaîtra.",
-  "Coûts de serveurs physiques trop lourds → Je rassemble et consolide votre matériel pour faire fondre vos factures."
+  "Excel trop complexe et source d'erreurs → Je conçois un outil simple que tout le monde utilise correctement.",
+  "Logiciel propriétaire trop cher ou inadapté → Je construis l'équivalent, adapté à 100% à votre métier.",
+  "Personne en interne pour maintenir le code → Je livre quelque chose que vous pouvez reprendre, sans moi."
 ]
-cta = "Demander un diagnostic"
+cta = "Décrire mon problème"
 
 [[extra.targets.items]]
-title = "Déploiements douloureux et dette d'exploitation accumulée ?"
-subtitle = "Stabilisez vos environnements et automatisez pour soutenir votre rythme de croissance, sans embauche à plein temps."
+title = "Votre entreprise croît et vos processus ne suivent plus"
+subtitle = "Passez à l'échelle sans recruter un développeur à temps plein ni vous noyer dans des outils génériques."
 bullets = [
-  "Mises en production manuelles risquées → J'automatise vos pipelines CI/CD pour des déploiements fiables.",
-  "Environnements de développement instables → J'isole votre dev/staging/prod avec des snapshots pour des rollbacks immédiats.",
-  "Manque de bande passante interne → J'interviens en chirurgie ciblée pour débloquer votre équipe CTO."
+  "Traitement de données manuel et chronophage → J'automatise le pipeline pour libérer vos équipes.",
+  "Intégrations entre outils qui ne se parlent pas → Je crée le connecteur sur mesure qu'aucun SaaS ne propose.",
+  "Besoin ponctuel et ciblé → J'interviens en chirurgie, sans engagement long terme imposé."
 ]
-cta = "Réserver un appel technique"
+cta = "Évaluer mon besoin"
 
 [[extra.targets.items]]
-title = "Sous l'eau face aux tâches manuelles d'exploitation ?"
-subtitle = "Déléguez le tooling Rust et l'automatisation d'infrastructure pour vous recentrer sur votre cœur d'exploitation."
+title = "Vous avez un projet technique bloqué faute de développeur disponible"
+subtitle = "Débloquez votre projet avec une intervention rapide et pragmatique, sans embauche ni prestataire SSII."
 bullets = [
-  "Procédures d'exploitation fragiles → J'écris vos playbooks Ansible pour standardiser et garantir la pérennité des instances.",
-  "Scripts bash limités et lents → Je code des binaires Rust robustes pour votre outillage interne.",
-  "Hausse toxique des licences VMware Broadcom → J'assure la migration complexe vers Proxmox et sa gestion en prod."
+  "Prototype ou MVP à valider rapidement → Je livre une première version fonctionnelle en quelques semaines.",
+  "Outil interne abandonné en cours de développement → Je reprends où l'ancien développeur s'est arrêté.",
+  "Besoin de Rust spécifiquement → Performance, fiabilité mémoire, binaires autonomes sans runtime."
 ]
-cta = "Discuter d'un renfort ponctuel"
+cta = "Discuter du projet"
 
 [extra.credibility]
-title = "Une expertise senior pour ne plus jouer à l'aveugle avec vos données"
-intro = "Que vous ayez une équipe tech à épauler, ou que vous soyez gérant et dépendant d'une boîte noire technique, je vous ramène des processus robustes et des choix pragmatiques."
+title = "Pourquoi choisir un développeur Rust plutôt qu'une agence ou un framework générique"
+intro = "Je ne vends pas de l'heure, je livre des résultats. Chaque outil que je construis est pensé pour durer, pour être repris par quelqu'un d'autre, et pour ne pas vous rendre dépendant de moi."
 
 [[extra.credibility.highlights]]
-title = "Vision système complète"
-text = "Réseau, Linux, déploiement, observabilité et sécurité : j'assure l'intégrité de vos flux et je fiabilise la sauvegarde de votre capital de données."
+title = "Rust pour la fiabilité, pas pour la mode"
+text = "Rust élimine les crashs silencieux et les fuites mémoire. Pour des outils internes critiques en PME, c'est la différence entre un outil qu'on oublie parce qu'il tourne tout seul et un outil qu'on surveille en permanence."
 
 [[extra.credibility.highlights]]
-title = "Rust quand la sécurité l'exige"
-text = "Je ne remplace pas un script qui marche. J'utilise Rust quand il vous faut un outil interne performant, fiable sur la durée et incapable de s'effondrer silencieusement."
+title = "Zéro dépendance imposée"
+text = "Je ne vous vends pas d'abonnement, pas d'infrastructure propriétaire, pas de plateforme dont vous devenez captif. Le code vous appartient, les binaires tournent où vous le décidez."
 
 [[extra.credibility.highlights]]
-title = "Recommandations concrètes"
-text = "Fini le blabla hors de prix : chaque audit propose des décisions simples qui tiennent compte de votre budget, du risque financier et du maintien en condition."
+title = "Communication directe, sans intermédiaire"
+text = "Vous parlez à la personne qui code. Pas à un chef de projet qui transmet à une équipe offshore. Les décisions sont prises vite, les ajustements aussi."
 
 [[extra.credibility.highlights]]
-title = "Posture freelance opérationnelle"
-text = "Intervention courte, communication directe, peu de friction et une préférence nette pour les solutions simples à opérer."
+title = "Intervenant senior, pas junior en formation"
+text = "Chaque euro investi dans le développement va dans le code, pas dans la hiérarchie d'une SSII. Vous payez pour l'expérience, pas pour l'encadrement de quelqu'un qui apprend sur votre projet."
 
 [extra.contact]
-title = "Discutons de vos enjeux avant le prochain incident coûteux"
-intro = "Décrivez le contexte, les symptômes ou le chantier à débloquer. Réponse par email sous 48h ouvrées. Le formulaire ci-dessous utilise Formspree, sans backend applicatif."
-form_cta = "Envoyer la demande"
-form_note = "Remplacez l'URL Formspree dans config.toml par votre endpoint avant mise en production."
+title = "Décrivez votre problème — je vous dis si je peux l'automatiser ou le coder"
+intro = "Pas besoin de savoir ce que vous voulez techniquement. Décrivez ce qui vous fait perdre du temps, ce qui bloque vos équipes, ou ce que vous rêveriez d'avoir. Réponse sous 48h ouvrées."
+form_cta = "Envoyer ma description"
+form_note = ""
 +++
 
 <!-- /home/max/Documents/Projets/Rust/site-perso-zola/content/_index.md -->

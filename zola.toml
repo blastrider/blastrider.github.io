@@ -1,7 +1,7 @@
 # /home/max/Documents/Projets/Rust/site-perso-zola/zola.toml
 base_url = "https://ferrix.fr"
-title = "Ferrix — Sysadmin senior & développeur Rust"
-description = "Audit, automatisation et fiabilisation d'infrastructures Linux par un sysadmin senior et développeur Rust."
+title = "Ferrix — Développeur Rust freelance pour PME, TPE et indépendants"
+description = "Développeur Rust freelance : applications sur mesure, outils métier et automatisation pour les PME, TPE et indépendants en France. Code livré, documenté, sans dépendance."
 default_language = "fr"
 compile_sass = false
 build_search_index = false

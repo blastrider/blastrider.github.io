@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Ferrix — Sysadmin senior & développeur Rust{% endblock %}</title>
+  <title>{% block title %}Ferrix — Développeur Rust freelance pour PME, TPE et indépendants{% endblock %}</title>
   <meta name="description" content="{% if page and page.description %}{{ page.description }}{% elif section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
   <meta name="author" content="{{ config.extra.legal_name | default(value=config.title) }}">
   <meta name="robots" content="index,follow">
@@ -18,7 +18,7 @@
   <meta property="og:image" content="{{ get_url(path='og-image.png') }}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Ferrix — Sysadmin senior et développeur Rust freelance">
+  <meta property="og:image:alt" content="Ferrix — Développeur Rust freelance pour PME, TPE et indépendants">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="{{ get_url(path='og-image.png') }}">
   <meta name="twitter:title" content="{% if page and page.title %}{{ page.title }}{% elif section and section.title %}{{ section.title }}{% else %}{{ config.title }}{% endif %}">
@@ -34,11 +34,11 @@
         "url": "https://ferrix.fr",
         "logo": "https://ferrix.fr/logo_FERRIX.svg",
         "image": "https://ferrix.fr/og-image.png",
-        "description": "Sysadmin senior freelance — audit infrastructure Linux, automatisation, virtualisation Proxmox/VMware, tooling Rust.",
+        "description": "Développeur Rust freelance — applications métier sur mesure, automatisation et outils internes robustes pour les PME et TPE en France.",
         "founder": {
           "@type": "Person",
           "name": "Maxime",
-          "jobTitle": "Sysadmin senior & développeur Rust"
+          "jobTitle": "Développeur Rust freelance"
         },
         "contactPoint": {
           "@type": "ContactPoint",
@@ -47,8 +47,8 @@
           "availableLanguage": "French"
         },
         "areaServed": "FR",
-        "serviceType": ["Audit infrastructure Linux", "Automatisation système", "Virtualisation Proxmox", "Migration VMware", "Développement Rust"],
-        "knowsAbout": ["Linux", "Rust", "Ansible", "Proxmox VE", "CI/CD", "Infrastructure as Code", "Observability", "VMware"],
+        "serviceType": ["Développement Rust sur mesure", "Application métier PME", "Automatisation de processus", "Reprise de code", "Outil interne"],
+        "knowsAbout": ["Rust", "Backend", "CLI", "Application métier", "Automatisation", "PME", "TPE", "Indépendants", "France", "Linux", "CI/CD"],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
           "name": "Services Ferrix",
@@ -57,24 +57,24 @@
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Audit technique infrastructure",
-                "description": "Cartographie de l'existant, détection des risques critiques, plan d'action priorisé pour la continuité d'activité."
+                "name": "Application métier sur mesure",
+                "description": "Remplacement d'Excel, de logiciel SaaS générique ou d'outil interne inadapté par une application taillée pour le flux de travail réel de l'entreprise."
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Automatisation d'infrastructure Linux",
-                "description": "Remplacement des processus manuels opaques par des systèmes standardisés, documentés et pérennes via Ansible et CI/CD."
+                "name": "Automatisation de tâches répétitives",
+                "description": "Identification et automatisation des processus manuels chronophages — pipelines de données, intégrations entre outils, traitements récurrents."
               }
             },
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Développement d'outils Rust sur mesure",
-                "description": "CLI internes, services backend sobres et chaîne de build adaptée au contexte d'exploitation."
+                "name": "Reprise et assainissement de code existant",
+                "description": "Audit, documentation et refactoring d'outils internes hérités. Livraison de code documenté, maintenable en autonomie par l'entreprise."
               }
             }
           ]
@@ -130,7 +130,7 @@
 
   <footer class="site-footer">
     <div class="container footer-shell">
-      <p>Ferrix &middot; Sysadmin freelance &middot; Linux, Proxmox, VMware, Rust</p>
+      <p>Ferrix &middot; Développeur Rust freelance &middot; PME, TPE &amp; indépendants</p>
 
       {% if config.extra.social_profiles %}
       <nav class="social-links" aria-label="Profils sociaux">
