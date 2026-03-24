@@ -1,0 +1,33 @@
+# Ferrix
+
+> Sysadmin senior freelance et développeur Rust. Audit d'infrastructure Linux, automatisation, virtualisation Proxmox/VMware, et développement d'outils Rust sur mesure pour les PME et équipes tech en France.
+
+Ferrix est un service de consulting en infrastructure informatique opéré par Maxime, basé en France. Il s'adresse aux dirigeants de PME dont l'informatique est devenue une boîte noire, aux équipes tech avec dette d'exploitation, et aux sysadmins nécessitant un renfort expert ponctuel.
+
+## Services
+
+- [Audit technique infrastructure](https://ferrix.fr/#offres) : Cartographie de l'existant (même si le créateur est parti), détection des failles critiques, remise d'un plan d'action priorisé compréhensible par la direction.
+- [Automatisation d'infrastructure Linux](https://ferrix.fr/#offres) : Remplacement des processus manuels opaques par des systèmes standardisés via Ansible, CI/CD, et provisioning automatisé. Sauvegardes certifiées et supervision.
+- [Développement d'outils Rust sur mesure](https://ferrix.fr/#offres) : CLI internes pour l'exploitation, services backend sobres, chaîne de build et packaging adaptée au contexte d'exploitation.
+
+## Cibles
+
+- Dirigeants de PME/TPE : informatique opaque, dépendance à un prestataire unique, sauvegardes non testées, coûts serveurs excessifs.
+- Équipes tech / CTO : déploiements manuels risqués, environnements instables, manque de bande passante interne.
+- Sysadmins : procédures fragiles, scripts bash limités, migration VMware Broadcom → Proxmox.
+
+## Technologies maîtrisées
+
+Linux, Rust, Ansible, Proxmox VE, VMware, CI/CD, Observabilité, Infrastructure as Code, Docker, Nginx, Caddy.
+
+## Engagements
+
+- Réponse sous 48h ouvrées.
+- Restitution claire pour la direction et feuille de route technique.
+- Posture opérationnelle : interventions courtes, communication directe, solutions simples à opérer.
+
+## Contact
+
+- Site web : https://ferrix.fr
+- Email : contact-ferrix@proton.me
+- Prise de rendez-vous (30 min) : https://calendly.com/guimaxali/discover-sysadmin

@@ -7,7 +7,7 @@ compile_sass = false
 build_search_index = false
 generate_feeds = false
 generate_sitemap = true
-generate_robots_txt = true
+generate_robots_txt = false
 minify_html = true
 
 [markdown]
@@ -18,3 +18,7 @@ site_name = "Ferrix"
 contact_email = "contact-ferrix@proton.me"
 formspree_endpoint = "https://formspree.io/f/xwvrzvoo"
 legal_name = "Ferrix"
+
+[extra.social_profiles]
+github = "https://github.com/blastrider"
+linkedin = "https://www.linkedin.com/in/guimaxali"
