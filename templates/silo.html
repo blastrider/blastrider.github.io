@@ -13,7 +13,7 @@
       urls=[config.base_url, blog_section.permalink, section.permalink]
     ) }}
     <div class="section-heading reveal">
-      <p class="eyebrow">{{ section.extra.eyebrow | default(value="Silo") }}</p>
+      <p class="eyebrow">{{ section.extra.eyebrow | default(value="Thématique") }}</p>
       <h1>{{ section.title }}</h1>
       <p>{{ section.extra.intro | default(value=section.description) }}</p>
     </div>
@@ -21,11 +21,11 @@
   </div>
 </article>
 
-{# Articles du silo : maillage interne descendant depuis la page pilier #}
+{# Articles de la thématique : maillage interne descendant depuis la page pilier #}
 <section class="section section-alt">
   <div class="container">
     <div class="section-heading reveal">
-      <p class="eyebrow">Articles du silo</p>
+      <p class="eyebrow">Articles</p>
       <h2>Approfondir cette thématique</h2>
     </div>
     {% if section.pages %}
@@ -35,7 +35,7 @@
       {% endfor %}
     </div>
     {% else %}
-    <p class="muted">Les articles de ce silo arrivent bientôt.</p>
+    <p class="muted">D'autres articles sur ce sujet arrivent bientôt.</p>
     {% endif %}
   </div>
 </section>

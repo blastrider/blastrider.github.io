@@ -37,7 +37,7 @@ là où on l'imagine.
 
 Automatiser un processus qui change sans cesse coûte plus cher qu'il ne rapporte.
 Concentrez-vous sur le stable et le répétitif. Pour comprendre où placer la limite,
-voir la [page pilier du silo Automatisation](@/blog/automatisation/_index.md).
+voir le [guide d'ensemble sur l'automatisation](@/blog/automatisation/_index.md).
 
 ## Étape suivante
 

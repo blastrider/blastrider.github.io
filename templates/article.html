@@ -38,13 +38,13 @@
       {{ page.content | safe }}
     </div>
 
-    {# Maillage interne : page pilier + articles frères du même silo #}
-    <aside class="article-silo-links reveal" aria-label="Dans le même silo">
-      <h2>Continuer dans le silo « {{ silo.title }} »</h2>
+    {# Maillage interne : page pilier + articles frères de la même thématique #}
+    <aside class="article-silo-links reveal" aria-label="Articles liés">
+      <h2>À lire aussi sur « {{ silo.title }} »</h2>
       <ul>
         <li class="pillar-link">
-          <a href="{{ silo.permalink | safe }}">📌 {{ silo.title }}</a>
-          <span>Page pilier du silo</span>
+          <a href="{{ silo.permalink | safe }}">{{ silo.title }}</a>
+          <span>Vue d'ensemble de la thématique</span>
         </li>
         {% for sibling in silo.pages %}
           {% if sibling.permalink != page.permalink %}
@@ -58,7 +58,7 @@
     </aside>
 
     <footer class="article-footer reveal">
-      <a class="button button-secondary" href="{{ silo.permalink | safe }}">← Retour au silo</a>
+      <a class="button button-secondary" href="{{ silo.permalink | safe }}">← Tous les articles de la thématique</a>
       <a class="button button-primary" href="{{ config.base_url }}/#contact">Décrire mon besoin</a>
     </footer>
   </div>

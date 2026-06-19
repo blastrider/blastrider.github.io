@@ -9,7 +9,7 @@ transparent = false
 
 [extra]
 eyebrow = "Blog"
-intro = "Des articles utiles, pas du contenu de remplissage. Chaque silo regroupe les guides d'une thématique : du concret pour comprendre quand et comment un outil Rust sur mesure fait gagner du temps à votre entreprise."
+intro = "Des articles utiles, pas du contenu de remplissage : du concret pour comprendre quand et comment un outil Rust sur mesure fait gagner du temps à votre entreprise."
 +++
 
-Le blog est organisé en **silos thématiques**. Chaque silo part d'une question que se posent réellement les PME, TPE et indépendants, et rassemble les articles qui y répondent en profondeur.
+Chaque thématique part d'une question que se posent réellement les PME, TPE et indépendants, et rassemble les articles qui y répondent en profondeur.

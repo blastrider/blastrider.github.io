@@ -40,7 +40,7 @@ Un outil métier qui envoie tout sur un cloud propriétaire vous rend captif : d
 tarif, de la disponibilité du service, et de la politique de confidentialité du
 fournisseur. Construire — ou faire construire — un outil souverain, c'est reprendre
 la main. C'est le même fil rouge que dans la
-[page pilier de ce silo](@/blog/ia-personnelle/_index.md).
+[présentation de cette série](@/blog/ia-personnelle/_index.md).
 
 ## Hybride local/cloud : ne pas choisir entre confidentialité et qualité
 
@@ -83,8 +83,8 @@ capable, mais chaque action passe par trois filets de sécurité :
 3. **Journal d'audit** — tout est tracé de façon infalsifiable.
 
 C'est précisément ce qui sépare un outil d'automatisation *fiable* d'un script
-qui peut tout casser. Le même principe guide la
-[page pilier Automatisation](@/blog/automatisation/_index.md) du blog.
+qui peut tout casser. Le même principe guide nos articles sur
+[l'automatisation](@/blog/automatisation/_index.md).
 
 ## Pourquoi Rust ?
 
@@ -154,5 +154,5 @@ pertinent.
 
 Cet article est le point de départ d'une série. Les approfondissements techniques
 (architecture hexagonale, routing local/cloud, mémoire, agents, fleet SSH) seront
-publiés au fil de l'eau dans ce silo. Retournez à la
-[page pilier IA personnelle](@/blog/ia-personnelle/_index.md) pour la vue d'ensemble.
+publiés au fil de l'eau. Retournez à la
+[présentation de la série](@/blog/ia-personnelle/_index.md) pour la vue d'ensemble.
