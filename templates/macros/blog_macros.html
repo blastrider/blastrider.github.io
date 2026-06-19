@@ -1,0 +1,42 @@
+{% macro article_card(page) %}
+<article class="card blog-card reveal">
+  {% if page.taxonomies and page.taxonomies.tags %}
+  <p class="card-index">{{ page.taxonomies.tags | first }}</p>
+  {% endif %}
+  <h3><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h3>
+  <p>{{ page.description }}</p>
+  <div class="blog-card-meta">
+    {% if page.date %}<time datetime="{{ page.date }}">{{ page.date | date(format='%d %b %Y') }}</time>{% endif %}
+    {% if page.extra.reading_time %}<span>· {{ page.extra.reading_time }} min de lecture</span>{% endif %}
+  </div>
+</article>
+{% endmacro %}
+
+{% macro breadcrumb(names, urls) %}
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <ol>
+    {% for name in names %}
+    <li>
+      {% if not loop.last %}<a href="{{ urls[loop.index0] | safe }}">{{ name }}</a>
+      {% else %}<span aria-current="page">{{ name }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {% for name in names %}
+    {
+      "@type": "ListItem",
+      "position": {{ loop.index }},
+      "name": {{ name | json_encode | safe }},
+      "item": {{ urls[loop.index0] | json_encode | safe }}
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endmacro %}

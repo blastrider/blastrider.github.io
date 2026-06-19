@@ -121,10 +121,10 @@
           <span></span>
         </summary>
         <nav class="site-nav" aria-label="Navigation principale">
-          <a href="#top">Accueil</a>
-          <a href="#offres">Offres</a>
-          <a href="#credibilite">Crédibilité</a>
-          <a href="#contact">Contact</a>
+          <a href="{{ get_url(path='@/_index.md') }}#top">Accueil</a>
+          <a href="{{ get_url(path='@/_index.md') }}#offres">Offres</a>
+          <a href="{{ get_url(path='@/blog/_index.md') }}">Blog</a>
+          <a href="{{ get_url(path='@/_index.md') }}#contact">Contact</a>
         </nav>
       </details>
     </div>
