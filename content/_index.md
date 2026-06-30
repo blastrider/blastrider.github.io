@@ -1,19 +1,22 @@
 +++
-title = "Ferrix — Développeur Rust freelance pour PME, TPE et indépendants"
+title = "Ferrix, développeur Rust freelance pour PME, TPE et indépendants"
 description = "Développeur Rust freelance : applications sur mesure, outils métier et automatisation pour les PME, TPE et indépendants en France. Code livré, documenté, sans dépendance."
 template = "index.html"
+
+[extra]
+blog_section_title = "Le blog"
 
 [extra.hero]
 eyebrow = "Développeur Rust freelance · PME, TPE & Indépendants"
 title = "Des logiciels sur mesure qui durent, sans dette technique ni dépendance"
-lead = "Votre activité tourne sur un outil bricolé, un fichier Excel en bout de course ou un logiciel propriétaire trop cher ? Je conçois des applications légères et fiables, adaptées exactement à votre métier — que vous soyez gérant de PME, TPE ou indépendant. Sans abonnement imposé, sans code spaghetti, sans prestataire indispensable."
-primary_cta = "Décrire mon besoin — réponse sous 48h"
+lead = "Votre activité tourne sur un outil bricolé, un fichier Excel en bout de course ou un logiciel propriétaire trop cher ? Je conçois des applications légères et fiables, adaptées exactement à votre métier, que vous soyez gérant de PME, TPE ou indépendant. Sans abonnement imposé, sans code spaghetti, sans prestataire indispensable."
+primary_cta = "Décrire mon besoin : réponse sous 48h"
 secondary_cta = "Réserver un appel de 30 min"
 secondary_cta_url = "https://calendly.com/guimaxali/discover-sysadmin"
 panel_text = "Du logiciel utile, pas du logiciel impressionnant. Je livre des outils que votre équipe adopte en une journée, que vous pouvez reprendre sans moi, et qui ne tombent pas en panne le vendredi soir."
 points = [
   "Applications métier sur mesure : remplacez l'Excel fragile ou le logiciel trop générique",
-  "Outils internes Rust : CLI, automatisation, traitement de données — fiables en production",
+  "Outils internes Rust : CLI, automatisation, traitement de données, fiables en production",
   "Code source livré, documenté, sans dépendance à mon intervention future"
 ]
 
@@ -41,7 +44,7 @@ deliverables = [
 
 [[extra.offers.items]]
 name = "Reprise et assainissement de code existant"
-description = "Vous avez hérité d'un outil interne que personne ne comprend plus ? Je le reprends, je le documente et je le remets en état — ou je le refais proprement si c'est plus rentable."
+description = "Vous avez hérité d'un outil interne que personne ne comprend plus ? Je le reprends, je le documente et je le remets en état, ou je le refais proprement si c'est plus rentable."
 deliverables = [
   "Audit du code existant : risques, dette technique, points de fragilité",
   "Refactoring ciblé ou réécriture complète selon le diagnostic",
@@ -102,7 +105,7 @@ title = "Intervenant senior, pas junior en formation"
 text = "Chaque euro investi dans le développement va dans le code, pas dans la hiérarchie d'une SSII. Vous payez pour l'expérience, pas pour l'encadrement de quelqu'un qui apprend sur votre projet."
 
 [extra.contact]
-title = "Décrivez votre problème — je vous dis si je peux l'automatiser ou le coder"
+title = "Décrivez votre problème : je vous dis si je peux l'automatiser ou le coder"
 intro = "Pas besoin de savoir ce que vous voulez techniquement. Décrivez ce qui vous fait perdre du temps, ce qui bloque vos équipes, ou ce que vous rêveriez d'avoir. Réponse sous 48h ouvrées."
 form_cta = "Envoyer ma description"
 form_note = ""

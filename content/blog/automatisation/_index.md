@@ -18,8 +18,8 @@ intro = "Chaque heure passée sur une tâche manuelle répétitive est une heure
 ## Pourquoi automatiser quand on est une petite structure
 
 Dans une PME ou une TPE, personne n'a de temps à perdre. Pourtant, les tâches
-répétitives — ressaisir des données, générer des rapports, renommer des fichiers,
-relancer un export — grignotent des heures chaque semaine. Les automatiser libère
+répétitives (ressaisir des données, générer des rapports, renommer des fichiers,
+relancer un export) grignotent des heures chaque semaine. Les automatiser libère
 du temps **et** réduit les erreurs humaines.
 
 ## Ce que recouvre cette thématique
