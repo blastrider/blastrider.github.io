@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
+    <title>Ferrix — Développeur Rust freelance pour PME, TPE et indépendants - méthode</title>
+    <subtitle>Développeur Rust freelance : applications sur mesure, outils métier et automatisation pour les PME, TPE et indépendants en France. Code livré, documenté, sans dépendance.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://ferrix.fr/tags/methode/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://ferrix.fr"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-06-10T00:00:00+00:00</updated>
+    <id>https://ferrix.fr/tags/methode/atom.xml</id>
+    <entry xml:lang="fr">
+        <title>Comment identifier les tâches à automatiser en priorité dans votre entreprise</title>
+        <published>2026-06-10T00:00:00+00:00</published>
+        <updated>2026-06-10T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ferrix.fr/blog/automatisation/identifier-taches-a-automatiser/"/>
+        <id>https://ferrix.fr/blog/automatisation/identifier-taches-a-automatiser/</id>
+        
+        <content type="html" xml:base="https://ferrix.fr/blog/automatisation/identifier-taches-a-automatiser/">&lt;p&gt;Avant d’automatiser quoi que ce soit, il faut savoir &lt;strong&gt;quoi&lt;&#x2F;strong&gt; automatiser. Toutes
+les tâches répétitives ne se valent pas : certaines vous font gagner une journée
+par mois, d’autres dix minutes par an. Voici comment faire le tri.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;la-regle-du-frequent-x-chronophage-x-risque&quot;&gt;La règle du « fréquent × chronophage × risqué »&lt;&#x2F;h2&gt;
+&lt;p&gt;Une tâche est un bon candidat à l’automatisation quand elle coche trois cases :&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Fréquente&lt;&#x2F;strong&gt; — vous la faites chaque jour, chaque semaine ou à chaque commande.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Chronophage&lt;&#x2F;strong&gt; — elle prend du temps à chaque fois.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Risquée&lt;&#x2F;strong&gt; — une erreur humaine y a des conséquences (facture fausse, donnée perdue).&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Multipliez ces trois facteurs : les tâches en haut du classement sont celles à
+traiter en premier.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;faites-l-inventaire-sur-une-semaine&quot;&gt;Faites l’inventaire sur une semaine&lt;&#x2F;h2&gt;
+&lt;p&gt;Pendant une semaine, notez chaque tâche manuelle répétitive et le temps qu’elle
+prend. Vous serez surpris de voir où part réellement votre temps — c’est rarement
+là où on l’imagine.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ne-tombez-pas-dans-le-piege-du-tout-automatiser&quot;&gt;Ne tombez pas dans le piège du « tout automatiser »&lt;&#x2F;h2&gt;
+&lt;p&gt;Automatiser un processus qui change sans cesse coûte plus cher qu’il ne rapporte.
+Concentrez-vous sur le stable et le répétitif. Pour comprendre où placer la limite,
+voir le &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;automatisation&#x2F;&quot;&gt;guide d’ensemble sur l’automatisation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;etape-suivante&quot;&gt;Étape suivante&lt;&#x2F;h2&gt;
+&lt;p&gt;Une fois vos priorités identifiées, l’enjeu devient la &lt;strong&gt;fiabilité&lt;&#x2F;strong&gt; de
+l’automatisation. C’est le sujet de l’article
+&lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;automatisation&#x2F;pourquoi-vos-scripts-cassent&#x2F;&quot;&gt;Pourquoi vos scripts cassent&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

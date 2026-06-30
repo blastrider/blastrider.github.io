@@ -635,3 +635,206 @@ h3 {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* ============================================================
+   Blog SEO en silo
+   ============================================================ */
+
+.breadcrumb {
+  margin: 0 0 1.5rem;
+  font-size: 0.85rem;
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: "›";
+  margin-left: 0.4rem;
+  color: var(--line);
+}
+
+.breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--accent-strong);
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--text);
+}
+
+.blog-hero {
+  padding-top: 6.5rem;
+}
+
+.blog-content {
+  max-width: 70ch;
+  margin-top: 1.5rem;
+  color: var(--muted);
+}
+
+.blog-content h2 {
+  color: var(--text);
+  margin-top: 2.2rem;
+}
+
+.blog-content h3 {
+  color: var(--text);
+  margin-top: 1.6rem;
+}
+
+.blog-content a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-content ul,
+.blog-content ol {
+  padding-left: 1.2rem;
+}
+
+.blog-content code {
+  background: var(--surface-strong);
+  padding: 0.1rem 0.35rem;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.blog-content pre {
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  border: 1px solid var(--line);
+}
+
+/* Cartes de blog / silo */
+.blog-card h3 a,
+.silo-card h3 a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.blog-card h3 a:hover,
+.silo-card h3 a:hover {
+  color: var(--accent-strong);
+}
+
+.blog-card-meta {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.silo-count {
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-top: 0.5rem;
+}
+
+.silo-card .button {
+  margin-top: 1rem;
+}
+
+/* Article */
+.article-shell {
+  max-width: 820px;
+}
+
+.article-header {
+  margin-bottom: 2rem;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.article-tags a {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.article-tags a:hover {
+  color: var(--accent-strong);
+  border-color: rgba(224, 92, 42, 0.35);
+}
+
+/* Maillage interne du silo */
+.article-silo-links {
+  margin-top: 3rem;
+  padding: 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.article-silo-links h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.article-silo-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.article-silo-links li a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.article-silo-links li a:hover {
+  color: var(--accent-strong);
+}
+
+.article-silo-links li span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.article-silo-links .pillar-link a {
+  color: var(--accent-strong);
+}
+
+.article-footer {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.muted {
+  color: var(--muted);
+}

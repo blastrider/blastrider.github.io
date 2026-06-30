@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
+    <title>Ferrix — Développeur Rust freelance pour PME, TPE et indépendants - llm-local</title>
+    <subtitle>Développeur Rust freelance : applications sur mesure, outils métier et automatisation pour les PME, TPE et indépendants en France. Code livré, documenté, sans dépendance.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://ferrix.fr/tags/llm-local/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://ferrix.fr"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-06-18T00:00:00+00:00</updated>
+    <id>https://ferrix.fr/tags/llm-local/atom.xml</id>
+    <entry xml:lang="fr">
+        <title>J&#x27;ai construit ma propre IA personnelle en Rust — pourquoi et comment</title>
+        <published>2026-06-18T00:00:00+00:00</published>
+        <updated>2026-06-18T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/"/>
+        <id>https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/</id>
+        
+        <content type="html" xml:base="https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/">&lt;p&gt;&lt;strong&gt;TL;DR&lt;&#x2F;strong&gt; — J’ai conçu &lt;em&gt;Aliénor&lt;&#x2F;em&gt;, une IA personnelle écrite en Rust, qui tourne
+par défaut en local (sur ma propre machine) et ne fait appel au cloud que lorsque
+la qualité l’exige &lt;strong&gt;et&lt;&#x2F;strong&gt; que la confidentialité le permet. Elle a une mémoire
+long-terme, peut agir sur le système sous garde-fous, et n’est pas un simple
+habillage de ChatGPT. Cet article explique pourquoi un tel projet a du sens — et
+ce que les PME, TPE et indépendants peuvent en retenir pour leurs propres outils.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;pourquoi-ne-pas-se-contenter-d-un-abonnement-chatgpt&quot;&gt;Pourquoi ne pas se contenter d’un abonnement ChatGPT ?&lt;&#x2F;h2&gt;
+&lt;p&gt;La réponse courte : &lt;strong&gt;la dépendance et la confidentialité&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Un assistant IA grand public, c’est un abonnement mensuel par utilisateur, des
+données envoyées sur des serveurs étrangers, et des conditions qui changent sans
+préavis. Pour un usage personnel anodin, peu importe. Mais dès qu’on manipule de
+l’information sensible — un dossier client, un contrat, des données RH — la
+question devient sérieuse : &lt;em&gt;où vont vraiment ces données, et qui peut les lire ?&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Aliénor part d’un principe inverse : &lt;strong&gt;le local d’abord&lt;&#x2F;strong&gt;. Le modèle tourne sur
+ma machine, les données restent chez moi, et rien ne part vers un service tiers
+sans une raison explicite.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;le-parallele-avec-l-entreprise&quot;&gt;Le parallèle avec l’entreprise&lt;&#x2F;h3&gt;
+&lt;p&gt;C’est exactement la problématique que rencontrent beaucoup de PME et d’indépendants.
+Un outil métier qui envoie tout sur un cloud propriétaire vous rend captif : du
+tarif, de la disponibilité du service, et de la politique de confidentialité du
+fournisseur. Construire — ou faire construire — un outil souverain, c’est reprendre
+la main. C’est le même fil rouge que dans la
+&lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;ia-personnelle&#x2F;&quot;&gt;présentation de cette série&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;hybride-local-cloud-ne-pas-choisir-entre-confidentialite-et-qualite&quot;&gt;Hybride local&#x2F;cloud : ne pas choisir entre confidentialité et qualité&lt;&#x2F;h2&gt;
+&lt;p&gt;Le piège classique du « tout local », c’est la qualité : les petits modèles qui
+tournent sur une machine ordinaire sont moins bons que les gros modèles cloud.
+Le piège du « tout cloud », c’est la confidentialité.&lt;&#x2F;p&gt;
+&lt;p&gt;Aliénor tranche par une règle simple, &lt;strong&gt;inscrite dans le code et non dans une
+option de configuration&lt;&#x2F;strong&gt; : une donnée marquée &lt;code&gt;Confidential&lt;&#x2F;code&gt; ne part &lt;em&gt;jamais&lt;&#x2F;em&gt; au
+cloud. Le routage choisit le modèle local par défaut, et ne bascule vers un
+fournisseur cloud que si la tâche le justifie &lt;em&gt;et&lt;&#x2F;em&gt; que la donnée n’est pas sensible.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;À retenir&lt;&#x2F;strong&gt; — La confidentialité ne doit pas être une case à cocher qu’on peut
+oublier de cocher. Dans un outil bien conçu, c’est une &lt;em&gt;garantie structurelle&lt;&#x2F;em&gt; :
+le code rend l’erreur impossible, plutôt que de compter sur la vigilance de
+l’utilisateur.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;une-ia-qui-se-souvient&quot;&gt;Une IA qui se souvient&lt;&#x2F;h2&gt;
+&lt;p&gt;Un assistant sans mémoire repart de zéro à chaque conversation. Aliénor dispose
+d’une &lt;strong&gt;mémoire long-terme&lt;&#x2F;strong&gt; : elle se souvient des échanges passés, des préférences,
+des décisions prises. Techniquement, cela repose sur une base locale (SQLite),
+des &lt;em&gt;embeddings&lt;&#x2F;em&gt; pour la recherche par similarité, et une consolidation périodique
+en arrière-plan.&lt;&#x2F;p&gt;
+&lt;p&gt;Pour une entreprise, l’équivalent serait un assistant qui connaît vos dossiers
+récurrents, vos process internes, le vocabulaire de votre métier — sans qu’on ait
+à tout lui réexpliquer chaque matin.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;une-ia-qui-agit-mais-sous-garde-fous&quot;&gt;Une IA qui agit — mais sous garde-fous&lt;&#x2F;h2&gt;
+&lt;p&gt;Le vrai saut, ce n’est pas de répondre à des questions : c’est d’&lt;strong&gt;agir&lt;&#x2F;strong&gt;. Lire
+l’état d’un système, éditer un fichier, lancer une commande. Aliénor en est
+capable, mais chaque action passe par trois filets de sécurité :&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Dry-run d’abord&lt;&#x2F;strong&gt; — l’IA &lt;em&gt;planifie&lt;&#x2F;em&gt; avant d’&lt;em&gt;appliquer&lt;&#x2F;em&gt;. La prévisualisation
+est garantie par le système de types, pas par une convention.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Allow-lists et confirmation&lt;&#x2F;strong&gt; — certaines actions exigent une validation
+humaine explicite, hors d’atteinte de l’IA elle-même.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Journal d’audit&lt;&#x2F;strong&gt; — tout est tracé de façon infalsifiable.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;C’est précisément ce qui sépare un outil d’automatisation &lt;em&gt;fiable&lt;&#x2F;em&gt; d’un script
+qui peut tout casser. Le même principe guide nos articles sur
+&lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;automatisation&#x2F;&quot;&gt;l’automatisation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;pourquoi-rust&quot;&gt;Pourquoi Rust ?&lt;&#x2F;h2&gt;
+&lt;p&gt;Rust apporte deux choses décisives pour ce genre de projet :&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;La fiabilité&lt;&#x2F;strong&gt; : beaucoup d’erreurs sont détectées à la compilation, avant
+même d’exécuter le programme. Pour un outil qui agit sur un système, c’est la
+différence entre « ça marche » et « ça marche vraiment, tout le temps ».&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;L’autonomie&lt;&#x2F;strong&gt; : un binaire Rust tourne sans runtime à installer, sans
+dépendance lourde. On le déploie où on veut, on n’est captif de rien.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Ce sont exactement les qualités que je recherche pour les outils métier que je
+construis pour des entreprises : pas de surprise silencieuse, pas de dépendance
+imposée.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ce-qu-une-pme-ou-un-independant-peut-en-retenir&quot;&gt;Ce qu’une PME ou un indépendant peut en retenir&lt;&#x2F;h2&gt;
+&lt;p&gt;Aliénor est un projet &lt;em&gt;personnel&lt;&#x2F;em&gt; et un véhicule d’apprentissage — pas un produit.
+Mais les principes qu’il illustre sont directement transposables :&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;La souveraineté des données est un choix d’architecture&lt;&#x2F;strong&gt;, pas une promesse
+marketing.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Un outil sur mesure&lt;&#x2F;strong&gt; colle à votre métier là où un SaaS générique vous force
+à vous adapter à lui.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;La fiabilité se construit dans le code&lt;&#x2F;strong&gt;, pas dans la documentation.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Si l’un de ces sujets résonne avec un besoin réel de votre entreprise — un outil
+interne, une automatisation, un assistant qui ne fait pas fuiter vos données —
+c’est précisément le genre de problème que j’aide à résoudre.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;faq&quot;&gt;FAQ&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;une-ia-locale-c-est-realiste-pour-une-petite-entreprise&quot;&gt;Une IA locale, c’est réaliste pour une petite entreprise ?&lt;&#x2F;h3&gt;
+&lt;p&gt;Oui, à condition de calibrer les attentes. Un modèle local ne remplace pas un
+gros modèle cloud sur toutes les tâches, mais il couvre très bien les usages
+récurrents et sensibles — au prix d’aucune fuite de données et sans abonnement
+par utilisateur.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;faut-il-du-materiel-couteux&quot;&gt;Faut-il du matériel coûteux ?&lt;&#x2F;h3&gt;
+&lt;p&gt;Pas nécessairement. Aliénor est pensée pour tourner sur du matériel modeste (une
+carte graphique grand public, voire en mode dégradé sur CPU). Le dimensionnement
+dépend de l’usage réel, qui s’évalue au cas par cas.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;pourquoi-ecrire-ca-en-rust-plutot-qu-en-python&quot;&gt;Pourquoi écrire ça en Rust plutôt qu’en Python ?&lt;&#x2F;h3&gt;
+&lt;p&gt;Pour la fiabilité et l’autonomie de déploiement. Python reste excellent pour
+prototyper et pour l’écosystème ML, mais un outil destiné à &lt;em&gt;agir&lt;&#x2F;em&gt; en production
+gagne énormément à être écrit dans un langage qui attrape les erreurs avant
+l’exécution.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;est-ce-que-mes-donnees-restent-vraiment-privees&quot;&gt;Est-ce que mes données restent vraiment privées ?&lt;&#x2F;h3&gt;
+&lt;p&gt;Dans une architecture comme celle d’Aliénor, oui : une donnée marquée
+confidentielle ne quitte jamais la machine, et cette garantie est imposée par le
+code lui-même, pas par un réglage qu’on peut oublier.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;comment-demarrer-un-projet-d-outil-souverain-dans-mon-entreprise&quot;&gt;Comment démarrer un projet d’outil souverain dans mon entreprise ?&lt;&#x2F;h3&gt;
+&lt;p&gt;En partant d’un problème concret et borné — une tâche répétitive, un besoin
+d’assistant sur un domaine précis — plutôt que d’un grand projet « IA » abstrait.
+&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;#contact&quot;&gt;Décrivez votre besoin&lt;&#x2F;a&gt; et on évalue ensemble si c’est
+pertinent.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;pour-aller-plus-loin&quot;&gt;Pour aller plus loin&lt;&#x2F;h2&gt;
+&lt;p&gt;Cet article est le point de départ d’une série. Les approfondissements techniques
+(architecture hexagonale, routing local&#x2F;cloud, mémoire, agents, fleet SSH) seront
+publiés au fil de l’eau. Retournez à la
+&lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;ia-personnelle&#x2F;&quot;&gt;présentation de la série&lt;&#x2F;a&gt; pour la vue d’ensemble.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,133 @@
+<!doctype html><html lang=fr><head><meta charset=utf-8><meta content="width=device-width,initial-scale=1" name=viewport><title>J'ai construit ma propre IA personnelle en Rust — pourquoi et comment</title><meta content="Retour d'expérience sur Aliénor : une IA personnelle hybride local/cloud en Rust, à mémoire long-terme, pensée comme une extension cognitive et non un wrapper ChatGPT. Et ce que ça change pour une entreprise." name=description><meta content=Ferrix name=author><meta content=index,follow name=robots><link href=https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/ rel=canonical><meta content=fr_FR property=og:locale><meta content=website property=og:type><meta content=Ferrix property=og:site_name><meta content="J'ai construit ma propre IA personnelle en Rust — pourquoi et comment" property=og:title><meta content="Retour d'expérience sur Aliénor : une IA personnelle hybride local/cloud en Rust, à mémoire long-terme, pensée comme une extension cognitive et non un wrapper ChatGPT. Et ce que ça change pour une entreprise." property=og:description><meta content=https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/ property=og:url><meta content=https://ferrix.fr/og-image.png property=og:image><meta content=1200 property=og:image:width><meta content=630 property=og:image:height><meta content="Ferrix — Développeur Rust freelance pour PME, TPE et indépendants" property=og:image:alt><meta content=summary_large_image name=twitter:card><meta content=https://ferrix.fr/og-image.png name=twitter:image><meta content="J'ai construit ma propre IA personnelle en Rust — pourquoi et comment" name=twitter:title><meta content="Retour d'expérience sur Aliénor : une IA personnelle hybride local/cloud en Rust, à mémoire long-terme, pensée comme une extension cognitive et non un wrapper ChatGPT. Et ce que ça change pour une entreprise." name=twitter:description><script type=application/ld+json>
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://ferrix.fr/#organization",
+        "name": "Ferrix",
+        "url": "https://ferrix.fr",
+        "logo": "https://ferrix.fr/logo_FERRIX.svg",
+        "image": "https://ferrix.fr/og-image.png",
+        "description": "Développeur Rust freelance — applications métier sur mesure, automatisation et outils internes robustes pour les PME et TPE en France.",
+        "founder": {
+          "@type": "Person",
+          "name": "Maxime",
+          "jobTitle": "Développeur Rust freelance"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "contact-ferrix@proton.me",
+          "contactType": "customer service",
+          "availableLanguage": "French"
+        },
+        "areaServed": "FR",
+        "serviceType": ["Développement Rust sur mesure", "Application métier PME", "Automatisation de processus", "Reprise de code", "Outil interne"],
+        "knowsAbout": ["Rust", "Backend", "CLI", "Application métier", "Automatisation", "PME", "TPE", "Indépendants", "France", "Linux", "CI/CD"],
+        "sameAs": [
+          "https://github.com/blastrider",
+          "https://fr.linkedin.com/in/maxime-gui"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Services Ferrix",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Application métier sur mesure",
+                "description": "Remplacement d'Excel, de logiciel SaaS générique ou d'outil interne inadapté par une application taillée pour le flux de travail réel de l'entreprise."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Automatisation de tâches répétitives",
+                "description": "Identification et automatisation des processus manuels chronophages — pipelines de données, intégrations entre outils, traitements récurrents."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Reprise et assainissement de code existant",
+                "description": "Audit, documentation et refactoring d'outils internes hérités. Livraison de code documenté, maintenable en autonomie par l'entreprise."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://ferrix.fr/#website",
+        "url": "https://ferrix.fr",
+        "name": "Ferrix",
+        "publisher": { "@id": "https://ferrix.fr/#organization" }
+      }
+    ]
+  }
+  </script><link href=https://ferrix.fr/favicon.ico rel=icon sizes=any><link href=https://ferrix.fr/favicon-48x48.png rel=icon sizes=48x48 type=image/png><link href=https://ferrix.fr/favicon.svg rel=icon type=image/svg+xml><link href=https://ferrix.fr/favicon-192.png rel=icon type=image/png><link href=https://ferrix.fr/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" as=style rel=preload><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel=stylesheet></noscript><link href=https://ferrix.fr/style.css rel=stylesheet><body id=top><header class=site-header><div class="container nav-shell"><a aria-label="Retour en haut de page" class=brand href=#top> <img alt=Ferrix class=brand-logo height=40 src=https://ferrix.fr/logo_FERRIX.svg> </a><details class=nav-toggle><summary aria-label="Ouvrir le menu de navigation"><span></span> <span></span> <span></span></summary> <nav aria-label="Navigation principale" class=site-nav><a href=https://ferrix.fr/#top>Accueil</a><a href=https://ferrix.fr/#offres>Offres</a><a href=https://ferrix.fr/blog/>Blog</a><a href=https://ferrix.fr/#contact>Contact</a></nav></details></div></header><main id=contenu><article class="section blog-article"><div class="container article-shell"><nav aria-label="Fil d'Ariane" class=breadcrumb><ol><li><a href=https://ferrix.fr>Accueil</a><li><a href=https://ferrix.fr/blog/>Blog</a><li><a href=https://ferrix.fr/blog/ia-personnelle/>IA personnelle en Rust : construire un assistant souverain, local et sur mesure</a><li><span aria-current=page>J'ai construit ma propre IA personnelle en Rust — pourquoi et comment</span></ol></nav><script type=application/ld+json>
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://ferrix.fr"
+    },
+    
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ferrix.fr/blog/"
+    },
+    
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "IA personnelle en Rust : construire un assistant souverain, local et sur mesure",
+      "item": "https://ferrix.fr/blog/ia-personnelle/"
+    },
+    
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "J'ai construit ma propre IA personnelle en Rust — pourquoi et comment",
+      "item": "https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/"
+    }
+    
+  ]
+}
+</script><header class="article-header reveal"><p class=eyebrow>IA personnelle<h1>J'ai construit ma propre IA personnelle en Rust — pourquoi et comment</h1><p class=lead>Retour d'expérience sur Aliénor : une IA personnelle hybride local/cloud en Rust, à mémoire long-terme, pensée comme une extension cognitive et non un wrapper ChatGPT. Et ce que ça change pour une entreprise.<div class=blog-card-meta><time datetime=2026-06-18>Publié le 18 June 2026</time><span>· 11 min</span><span>· ~6 min</span></div><ul aria-label=Tags class=article-tags><li><a href=https://ferrix.fr/tags/ia-personnelle/>#ia-personnelle</a><li><a href=https://ferrix.fr/tags/rust/>#rust</a><li><a href=https://ferrix.fr/tags/souverainete/>#souveraineté</a><li><a href=https://ferrix.fr/tags/llm-local/>#llm-local</a></ul></header><div class="blog-content reveal"><p><strong>TL;DR</strong> — J’ai conçu <em>Aliénor</em>, une IA personnelle écrite en Rust, qui tourne par défaut en local (sur ma propre machine) et ne fait appel au cloud que lorsque la qualité l’exige <strong>et</strong> que la confidentialité le permet. Elle a une mémoire long-terme, peut agir sur le système sous garde-fous, et n’est pas un simple habillage de ChatGPT. Cet article explique pourquoi un tel projet a du sens — et ce que les PME, TPE et indépendants peuvent en retenir pour leurs propres outils.<h2 id=pourquoi-ne-pas-se-contenter-d-un-abonnement-chatgpt>Pourquoi ne pas se contenter d’un abonnement ChatGPT ?</h2><p>La réponse courte : <strong>la dépendance et la confidentialité</strong>.<p>Un assistant IA grand public, c’est un abonnement mensuel par utilisateur, des données envoyées sur des serveurs étrangers, et des conditions qui changent sans préavis. Pour un usage personnel anodin, peu importe. Mais dès qu’on manipule de l’information sensible — un dossier client, un contrat, des données RH — la question devient sérieuse : <em>où vont vraiment ces données, et qui peut les lire ?</em><p>Aliénor part d’un principe inverse : <strong>le local d’abord</strong>. Le modèle tourne sur ma machine, les données restent chez moi, et rien ne part vers un service tiers sans une raison explicite.<h3 id=le-parallele-avec-l-entreprise>Le parallèle avec l’entreprise</h3><p>C’est exactement la problématique que rencontrent beaucoup de PME et d’indépendants. Un outil métier qui envoie tout sur un cloud propriétaire vous rend captif : du tarif, de la disponibilité du service, et de la politique de confidentialité du fournisseur. Construire — ou faire construire — un outil souverain, c’est reprendre la main. C’est le même fil rouge que dans la <a href=https://ferrix.fr/blog/ia-personnelle/>présentation de cette série</a>.<h2 id=hybride-local-cloud-ne-pas-choisir-entre-confidentialite-et-qualite>Hybride local/cloud : ne pas choisir entre confidentialité et qualité</h2><p>Le piège classique du « tout local », c’est la qualité : les petits modèles qui tournent sur une machine ordinaire sont moins bons que les gros modèles cloud. Le piège du « tout cloud », c’est la confidentialité.<p>Aliénor tranche par une règle simple, <strong>inscrite dans le code et non dans une option de configuration</strong> : une donnée marquée <code>Confidential</code> ne part <em>jamais</em> au cloud. Le routage choisit le modèle local par défaut, et ne bascule vers un fournisseur cloud que si la tâche le justifie <em>et</em> que la donnée n’est pas sensible.<blockquote><p><strong>À retenir</strong> — La confidentialité ne doit pas être une case à cocher qu’on peut oublier de cocher. Dans un outil bien conçu, c’est une <em>garantie structurelle</em> : le code rend l’erreur impossible, plutôt que de compter sur la vigilance de l’utilisateur.</blockquote><h2 id=une-ia-qui-se-souvient>Une IA qui se souvient</h2><p>Un assistant sans mémoire repart de zéro à chaque conversation. Aliénor dispose d’une <strong>mémoire long-terme</strong> : elle se souvient des échanges passés, des préférences, des décisions prises. Techniquement, cela repose sur une base locale (SQLite), des <em>embeddings</em> pour la recherche par similarité, et une consolidation périodique en arrière-plan.<p>Pour une entreprise, l’équivalent serait un assistant qui connaît vos dossiers récurrents, vos process internes, le vocabulaire de votre métier — sans qu’on ait à tout lui réexpliquer chaque matin.<h2 id=une-ia-qui-agit-mais-sous-garde-fous>Une IA qui agit — mais sous garde-fous</h2><p>Le vrai saut, ce n’est pas de répondre à des questions : c’est d’<strong>agir</strong>. Lire l’état d’un système, éditer un fichier, lancer une commande. Aliénor en est capable, mais chaque action passe par trois filets de sécurité :<ol><li><strong>Dry-run d’abord</strong> — l’IA <em>planifie</em> avant d’<em>appliquer</em>. La prévisualisation est garantie par le système de types, pas par une convention.<li><strong>Allow-lists et confirmation</strong> — certaines actions exigent une validation humaine explicite, hors d’atteinte de l’IA elle-même.<li><strong>Journal d’audit</strong> — tout est tracé de façon infalsifiable.</ol><p>C’est précisément ce qui sépare un outil d’automatisation <em>fiable</em> d’un script qui peut tout casser. Le même principe guide nos articles sur <a href=https://ferrix.fr/blog/automatisation/>l’automatisation</a>.<h2 id=pourquoi-rust>Pourquoi Rust ?</h2><p>Rust apporte deux choses décisives pour ce genre de projet :<ul><li><strong>La fiabilité</strong> : beaucoup d’erreurs sont détectées à la compilation, avant même d’exécuter le programme. Pour un outil qui agit sur un système, c’est la différence entre « ça marche » et « ça marche vraiment, tout le temps ».<li><strong>L’autonomie</strong> : un binaire Rust tourne sans runtime à installer, sans dépendance lourde. On le déploie où on veut, on n’est captif de rien.</ul><p>Ce sont exactement les qualités que je recherche pour les outils métier que je construis pour des entreprises : pas de surprise silencieuse, pas de dépendance imposée.<h2 id=ce-qu-une-pme-ou-un-independant-peut-en-retenir>Ce qu’une PME ou un indépendant peut en retenir</h2><p>Aliénor est un projet <em>personnel</em> et un véhicule d’apprentissage — pas un produit. Mais les principes qu’il illustre sont directement transposables :<ul><li><strong>La souveraineté des données est un choix d’architecture</strong>, pas une promesse marketing.<li><strong>Un outil sur mesure</strong> colle à votre métier là où un SaaS générique vous force à vous adapter à lui.<li><strong>La fiabilité se construit dans le code</strong>, pas dans la documentation.</ul><p>Si l’un de ces sujets résonne avec un besoin réel de votre entreprise — un outil interne, une automatisation, un assistant qui ne fait pas fuiter vos données — c’est précisément le genre de problème que j’aide à résoudre.<h2 id=faq>FAQ</h2><h3 id=une-ia-locale-c-est-realiste-pour-une-petite-entreprise>Une IA locale, c’est réaliste pour une petite entreprise ?</h3><p>Oui, à condition de calibrer les attentes. Un modèle local ne remplace pas un gros modèle cloud sur toutes les tâches, mais il couvre très bien les usages récurrents et sensibles — au prix d’aucune fuite de données et sans abonnement par utilisateur.<h3 id=faut-il-du-materiel-couteux>Faut-il du matériel coûteux ?</h3><p>Pas nécessairement. Aliénor est pensée pour tourner sur du matériel modeste (une carte graphique grand public, voire en mode dégradé sur CPU). Le dimensionnement dépend de l’usage réel, qui s’évalue au cas par cas.<h3 id=pourquoi-ecrire-ca-en-rust-plutot-qu-en-python>Pourquoi écrire ça en Rust plutôt qu’en Python ?</h3><p>Pour la fiabilité et l’autonomie de déploiement. Python reste excellent pour prototyper et pour l’écosystème ML, mais un outil destiné à <em>agir</em> en production gagne énormément à être écrit dans un langage qui attrape les erreurs avant l’exécution.<h3 id=est-ce-que-mes-donnees-restent-vraiment-privees>Est-ce que mes données restent vraiment privées ?</h3><p>Dans une architecture comme celle d’Aliénor, oui : une donnée marquée confidentielle ne quitte jamais la machine, et cette garantie est imposée par le code lui-même, pas par un réglage qu’on peut oublier.<h3 id=comment-demarrer-un-projet-d-outil-souverain-dans-mon-entreprise>Comment démarrer un projet d’outil souverain dans mon entreprise ?</h3><p>En partant d’un problème concret et borné — une tâche répétitive, un besoin d’assistant sur un domaine précis — plutôt que d’un grand projet « IA » abstrait. <a href=https://ferrix.fr/#contact rel=external>Décrivez votre besoin</a> et on évalue ensemble si c’est pertinent.<h2 id=pour-aller-plus-loin>Pour aller plus loin</h2><p>Cet article est le point de départ d’une série. Les approfondissements techniques (architecture hexagonale, routing local/cloud, mémoire, agents, fleet SSH) seront publiés au fil de l’eau. Retournez à la <a href=https://ferrix.fr/blog/ia-personnelle/>présentation de la série</a> pour la vue d’ensemble.</div><aside aria-label="Articles liés" class="article-silo-links reveal"><h2>À lire aussi sur « IA personnelle en Rust : construire un assistant souverain, local et sur mesure »</h2><ul><li class=pillar-link><a href=https://ferrix.fr/blog/ia-personnelle/>IA personnelle en Rust : construire un assistant souverain, local et sur mesure</a> <span>Vue d'ensemble de la thématique</span><li><a href=https://ferrix.fr/blog/ia-personnelle/donnee-confidentielle-jamais-cloud-par-le-code/>Garantir qu'une donnée confidentielle ne parte jamais au cloud — par le code, pas par une option</a> <span>Comment Aliénor, une IA en Rust, empêche structurellement une donnée sensible de partir ve…</span></ul></aside><footer class="article-footer reveal"><a class="button button-secondary" href=https://ferrix.fr/blog/ia-personnelle/>← Tous les articles de la thématique</a><a class="button button-primary" href=https://ferrix.fr/#contact>Décrire mon besoin</a></footer></div></article><script type=application/ld+json>
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "J'ai construit ma propre IA personnelle en Rust — pourquoi et comment",
+  "description": "Retour d'expérience sur Aliénor : une IA personnelle hybride local/cloud en Rust, à mémoire long-terme, pensée comme une extension cognitive et non un wrapper ChatGPT. Et ce que ça change pour une entreprise.",
+  "url": "https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/" },
+  "datePublished": "2026-06-18",
+  "dateModified": "2026-06-18",
+  "inLanguage": "fr-FR",
+  "isPartOf": { "@type": "Blog", "@id": "https://ferrix.fr/blog/", "name": "Blog Ferrix" },
+  "articleSection": "IA personnelle en Rust : construire un assistant souverain, local et sur mesure",
+  "keywords": "ia-personnelle, rust, souveraineté, llm-local",
+  "author": {
+    "@type": "Person",
+    "name": "Maxime",
+    "url": "https://ferrix.fr"
+  },
+  "publisher": { "@id": "https://ferrix.fr/#organization" }
+}
+</script></main><footer class=site-footer><div class="container footer-shell"><p>Ferrix · Développeur Rust freelance · PME, TPE & indépendants<nav aria-label="Profils sociaux" class=social-links><a rel="noopener noreferrer me" class=social-link href=https://github.com/blastrider target=_blank title=GitHub> <svg viewbox="0 0 24 24" aria-hidden=true fill=currentColor focusable=false xmlns=http://www.w3.org/2000/svg><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> <span class=sr-only>GitHub</span> </a><a rel="noopener noreferrer me" class=social-link href=https://www.linkedin.com/in/guimaxali target=_blank title=LinkedIn> <svg viewbox="0 0 24 24" aria-hidden=true fill=currentColor focusable=false xmlns=http://www.w3.org/2000/svg><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> <span class=sr-only>LinkedIn</span> </a></nav></div></footer><script>const io=new IntersectionObserver((entries)=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add("is-visible")),{threshold:.14});
+    document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+    const header=document.querySelector(".site-header");
+    const menu=document.querySelector(".nav-toggle");
+    addEventListener("scroll",()=>header.classList.toggle("is-scrolled",scrollY>12),{passive:true});
+    document.querySelectorAll('.site-nav a').forEach(a=>a.addEventListener("click",()=>menu&&menu.removeAttribute("open")));</script>

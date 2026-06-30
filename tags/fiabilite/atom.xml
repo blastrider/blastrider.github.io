@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
+    <title>Ferrix — Développeur Rust freelance pour PME, TPE et indépendants - fiabilité</title>
+    <subtitle>Développeur Rust freelance : applications sur mesure, outils métier et automatisation pour les PME, TPE et indépendants en France. Code livré, documenté, sans dépendance.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://ferrix.fr/tags/fiabilite/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://ferrix.fr"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-06-15T00:00:00+00:00</updated>
+    <id>https://ferrix.fr/tags/fiabilite/atom.xml</id>
+    <entry xml:lang="fr">
+        <title>Pourquoi vos scripts d&#x27;automatisation cassent (et comment l&#x27;éviter)</title>
+        <published>2026-06-15T00:00:00+00:00</published>
+        <updated>2026-06-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ferrix.fr/blog/automatisation/pourquoi-vos-scripts-cassent/"/>
+        <id>https://ferrix.fr/blog/automatisation/pourquoi-vos-scripts-cassent/</id>
+        
+        <content type="html" xml:base="https://ferrix.fr/blog/automatisation/pourquoi-vos-scripts-cassent/">&lt;p&gt;Un script qui marche le jour où on l’écrit n’est pas un script fiable. La vraie
+question, c’est : que se passe-t-il dans six mois, quand le fichier source change
+de format et que personne ne s’en souvient ?&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;les-trois-causes-classiques-de-casse&quot;&gt;Les trois causes classiques de casse&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Hypothèses implicites&lt;&#x2F;strong&gt; — le script suppose qu’une colonne est toujours à la
+même place, qu’un fichier existe toujours, qu’un réseau répond toujours.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Échec silencieux&lt;&#x2F;strong&gt; — en cas d’erreur, le script continue comme si de rien
+n’était et produit un résultat faux.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Aucune trace&lt;&#x2F;strong&gt; — quand ça casse, impossible de savoir pourquoi.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;ce-qui-rend-un-outil-robuste&quot;&gt;Ce qui rend un outil robuste&lt;&#x2F;h2&gt;
+&lt;p&gt;Un outil d’automatisation fiable &lt;strong&gt;valide ses entrées&lt;&#x2F;strong&gt;, &lt;strong&gt;gère explicitement les
+erreurs&lt;&#x2F;strong&gt;, &lt;strong&gt;journalise&lt;&#x2F;strong&gt; ce qu’il fait, et &lt;strong&gt;s’arrête proprement&lt;&#x2F;strong&gt; plutôt que de
+produire des données fausses. C’est exactement là que des langages comme Rust
+apportent une garantie supplémentaire : beaucoup d’erreurs sont détectées avant
+même l’exécution.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;le-cout-cache-des-scripts-fragiles&quot;&gt;Le coût caché des scripts fragiles&lt;&#x2F;h2&gt;
+&lt;p&gt;Un script qui échoue en silence coûte bien plus cher qu’un outil robuste : données
+corrompues, confiance perdue, temps passé à déboguer dans l’urgence. Pour la vue
+d’ensemble du sujet, retournez à la
+&lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;automatisation&#x2F;&quot;&gt;page pilier Automatisation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;pour-aller-plus-loin&quot;&gt;Pour aller plus loin&lt;&#x2F;h2&gt;
+&lt;p&gt;Avant d’investir dans un outil robuste, assurez-vous d’automatiser la bonne tâche :
+voir &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;automatisation&#x2F;identifier-taches-a-automatiser&#x2F;&quot;&gt;Comment identifier les tâches à automatiser en priorité&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
