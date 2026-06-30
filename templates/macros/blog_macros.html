@@ -1,6 +1,10 @@
-{% macro article_card(page) %}
+{# show_silo : affiche la thématique d'origine de l'article (utile sur les listings cross-silo) #}
+{% macro article_card(page, show_silo=false) %}
 <article class="card blog-card reveal">
-  {% if page.taxonomies and page.taxonomies.tags %}
+  {% if show_silo and page.ancestors %}
+    {% set card_silo = get_section(path=page.ancestors | last) %}
+    <p class="card-index"{% if card_silo.extra.silo_color %} style="color:{{ card_silo.extra.silo_color }}"{% endif %}>{{ card_silo.extra.eyebrow | default(value=card_silo.title) }}</p>
+  {% elif page.taxonomies and page.taxonomies.tags %}
   <p class="card-index">{{ page.taxonomies.tags | first }}</p>
   {% endif %}
   <h3><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h3>
@@ -10,6 +14,32 @@
     {% if page.extra.reading_time %}<span>· {{ page.extra.reading_time }} min de lecture</span>{% endif %}
   </div>
 </article>
+{% endmacro %}
+
+{# Maillage inter-silos : liste les autres thématiques que current_path.
+   Décloisonne les silos sans diluer la logique pilier/frères. #}
+{% macro other_silos(current_path) %}
+{% set blog_section = get_section(path="blog/_index.md") %}
+{% set others = [] %}
+{% for path in blog_section.subsections %}
+  {% if path != current_path %}{% set_global others = others | concat(with=path) %}{% endif %}
+{% endfor %}
+{% if others %}
+<aside class="other-silos reveal" aria-label="Autres thématiques">
+  <h2>Explorer les autres thématiques</h2>
+  <ul class="other-silos-list">
+    {% for path in others %}
+      {% set s = get_section(path=path) %}
+      <li>
+        <a href="{{ s.permalink | safe }}"{% if s.extra.silo_color %} style="--silo-color:{{ s.extra.silo_color }}"{% endif %}>
+          <span class="other-silo-name">{{ s.title }}</span>
+          <span class="other-silo-desc">{{ s.description | truncate(length=110) }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</aside>
+{% endif %}
 {% endmacro %}
 
 {% macro breadcrumb(names, urls) %}

@@ -10,7 +10,8 @@
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="{{ current_url | default(value=config.base_url) }}">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  {% block og_extra %}{% endblock %}
   <meta property="og:site_name" content="{{ config.extra.site_name | default(value=config.title) }}">
   <meta property="og:title" content="{% if page and page.title %}{{ page.title }}{% elif section and section.title %}{{ section.title }}{% else %}{{ config.title }}{% endif %}">
   <meta property="og:description" content="{% if page and page.description %}{{ page.description }}{% elif section and section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">

@@ -4,6 +4,17 @@
 
 {% block title %}{{ page.title }}{% endblock %}
 
+{% block og_type %}article{% endblock %}
+{% block og_extra %}
+  {% if page.date %}<meta property="article:published_time" content="{{ page.date }}">{% endif %}
+  {% if page.updated and page.updated != page.date %}<meta property="article:modified_time" content="{{ page.updated }}">{% endif %}
+  <meta property="article:author" content="{{ page.extra.author | default(value='Maxime') }}">
+  {% set article_silo = get_section(path=page.ancestors | last) %}
+  <meta property="article:section" content="{{ article_silo.title }}">
+  {% if page.taxonomies and page.taxonomies.tags %}{% for tag in page.taxonomies.tags %}
+  <meta property="article:tag" content="{{ tag }}">{% endfor %}{% endif %}
+{% endblock %}
+
 {% block content %}
 {% set blog_section = get_section(path="blog/_index.md") %}
 {% set silo = get_section(path=page.ancestors | last) %}
@@ -22,8 +33,8 @@
       <div class="blog-card-meta">
         {% if page.date %}<time datetime="{{ page.date }}">Publié le {{ page.date | date(format='%d %B %Y') }}</time>{% endif %}
         {% if page.updated and page.updated != page.date %}<span>· Mis à jour le {{ page.updated | date(format='%d %B %Y') }}</span>{% endif %}
-        {% if page.extra.reading_time %}<span>· {{ page.extra.reading_time }} min</span>{% endif %}
-        {% if page.reading_time %}<span>· ~{{ page.reading_time }} min</span>{% endif %}
+        {% if page.extra.reading_time %}<span>· {{ page.extra.reading_time }} min de lecture</span>
+        {% elif page.word_count %}<span>· ~{{ page.word_count / 200 | round(method="ceil") | int }} min de lecture</span>{% endif %}
       </div>
       {% if page.taxonomies and page.taxonomies.tags %}
       <ul class="article-tags" aria-label="Tags">
@@ -57,6 +68,9 @@
       </ul>
     </aside>
 
+    {# Maillage inter-silos : ponts vers les autres thématiques #}
+    {{ blog::other_silos(current_path=page.ancestors | last) }}
+
     <footer class="article-footer reveal">
       <a class="button button-secondary" href="{{ silo.permalink | safe }}">← Tous les articles de la thématique</a>
       <a class="button button-primary" href="{{ config.base_url }}/#contact">Décrire mon besoin</a>
@@ -68,12 +82,14 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": {{ page.title | json_encode | safe }},
+  "headline": {{ page.title | truncate(length=110, end="") | json_encode | safe }},
   "description": {{ page.description | json_encode | safe }},
   "url": {{ page.permalink | json_encode | safe }},
+  "image": {{ get_url(path="og-image.png") | json_encode | safe }},
   "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page.permalink | json_encode | safe }} },
   {% if page.date %}"datePublished": {{ page.date | json_encode | safe }},{% endif %}
-  {% if page.updated %}"dateModified": {{ page.updated | json_encode | safe }},{% endif %}
+  {% if page.updated and page.updated != page.date %}"dateModified": {{ page.updated | json_encode | safe }},
+  {% elif page.date %}"dateModified": {{ page.date | json_encode | safe }},{% endif %}
   "inLanguage": "fr-FR",
   "isPartOf": { "@type": "Blog", "@id": {{ blog_section.permalink | json_encode | safe }}, "name": "Blog Ferrix" },
   "articleSection": {{ silo.title | json_encode | safe }},
