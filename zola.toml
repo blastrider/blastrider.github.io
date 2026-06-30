@@ -5,10 +5,14 @@ description = "Développeur Rust freelance : applications sur mesure, outils mé
 default_language = "fr"
 compile_sass = false
 build_search_index = false
-generate_feeds = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
 generate_sitemap = true
 generate_robots_txt = false
 minify_html = true
+taxonomies = [
+  { name = "tags", feed = true, paginate_by = 10 },
+]
 
 [markdown]
 smart_punctuation = true

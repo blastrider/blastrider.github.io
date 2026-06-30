@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% import "macros/blog_macros.html" as blog %}
+{# /home/max/Documents/Projets/Rust/site-perso-zola/templates/blog.html #}
+
+{% block title %}{{ section.title }}{% endblock %}
+
+{% block content %}
+<section class="section blog-hero">
+  <div class="container">
+    {{ blog::breadcrumb(
+      names=["Accueil", "Blog"],
+      urls=[config.base_url, section.permalink]
+    ) }}
+    <div class="section-heading reveal">
+      <p class="eyebrow">{{ section.extra.eyebrow | default(value="Blog") }}</p>
+      <h1>{{ section.title }}</h1>
+      <p>{{ section.extra.intro | default(value=section.description) }}</p>
+    </div>
+    <div class="blog-content reveal">{{ section.content | safe }}</div>
+  </div>
+</section>
+
+{# Liste des silos = sous-sections de /blog #}
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="eyebrow">Thématiques</p>
+      <h2>Choisissez votre thématique</h2>
+    </div>
+    <div class="offer-grid">
+      {% for path in section.subsections %}
+        {% set silo = get_section(path=path) %}
+        <article class="card offer-card silo-card reveal">
+          <p class="card-index" {% if silo.extra.silo_color %}style="color:{{ silo.extra.silo_color }}"{% endif %}>{{ silo.extra.eyebrow | default(value="Thématique") }}</p>
+          <h3><a href="{{ silo.permalink | safe }}">{{ silo.title }}</a></h3>
+          <p>{{ silo.description }}</p>
+          <p class="silo-count">{{ silo.pages | length }} article{{ silo.pages | length | pluralize }}</p>
+          <a class="button button-secondary" href="{{ silo.permalink | safe }}">Voir les articles</a>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# Derniers articles tous silos confondus #}
+{% if section.pages %}
+<section class="section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="eyebrow">Derniers articles</p>
+      <h2>Publications récentes</h2>
+    </div>
+    <div class="offer-grid">
+      {% for page in section.pages | slice(end=6) %}
+        {{ blog::article_card(page=page) }}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock content %}
