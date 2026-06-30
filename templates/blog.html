@@ -52,10 +52,24 @@
     </div>
     <div class="offer-grid">
       {% for page in section.pages | slice(end=6) %}
-        {{ blog::article_card(page=page) }}
+        {{ blog::article_card(page=page, show_silo=true) }}
       {% endfor %}
     </div>
   </div>
 </section>
 {% endif %}
+
+{# Page d'accueil du blog = Blog listant ses thématiques #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": {{ section.permalink | json_encode | safe }},
+  "name": {{ section.title | json_encode | safe }},
+  "description": {{ section.description | json_encode | safe }},
+  "url": {{ section.permalink | json_encode | safe }},
+  "inLanguage": "fr-FR",
+  "publisher": { "@id": "https://ferrix.fr/#organization" }
+}
+</script>
 {% endblock content %}
