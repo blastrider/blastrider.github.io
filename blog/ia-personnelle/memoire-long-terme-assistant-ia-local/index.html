@@ -1,0 +1,171 @@
+<!doctype html><html lang=fr><head><meta charset=utf-8><meta content="width=device-width,initial-scale=1" name=viewport><title>Donner une mémoire long-terme à un assistant IA local, sans tout renvoyer au cloud</title><meta content="Comment Aliénor, une IA en Rust, se souvient sur la durée : SQLite comme seule source de vérité, embeddings calculés en local, rappel hybride (lexical + sémantique + graphe) et consolidation qui range la mémoire sans jamais rien supprimer. Extraits de code réels." name=description><meta content=Ferrix name=author><meta content=index,follow name=robots><link href=https://ferrix.fr/blog/ia-personnelle/memoire-long-terme-assistant-ia-local/ rel=canonical><meta content=fr_FR property=og:locale><meta content=article property=og:type><meta content=2026-06-30 property=article:published_time><meta content=Maxime property=article:author><meta content="IA personnelle en Rust : construire un assistant souverain, local et sur mesure" property=article:section><meta content=ia-personnelle property=article:tag><meta content=rust property=article:tag><meta content=souveraineté property=article:tag><meta content=llm-local property=article:tag><meta content=mémoire property=article:tag><meta content=Ferrix property=og:site_name><meta content="Donner une mémoire long-terme à un assistant IA local, sans tout renvoyer au cloud" property=og:title><meta content="Comment Aliénor, une IA en Rust, se souvient sur la durée : SQLite comme seule source de vérité, embeddings calculés en local, rappel hybride (lexical + sémantique + graphe) et consolidation qui range la mémoire sans jamais rien supprimer. Extraits de code réels." property=og:description><meta content=https://ferrix.fr/blog/ia-personnelle/memoire-long-terme-assistant-ia-local/ property=og:url><meta content=https://ferrix.fr/og-image.png property=og:image><meta content=1200 property=og:image:width><meta content=630 property=og:image:height><meta content="Ferrix — Développeur Rust freelance pour PME, TPE et indépendants" property=og:image:alt><meta content=summary_large_image name=twitter:card><meta content=https://ferrix.fr/og-image.png name=twitter:image><meta content="Donner une mémoire long-terme à un assistant IA local, sans tout renvoyer au cloud" name=twitter:title><meta content="Comment Aliénor, une IA en Rust, se souvient sur la durée : SQLite comme seule source de vérité, embeddings calculés en local, rappel hybride (lexical + sémantique + graphe) et consolidation qui range la mémoire sans jamais rien supprimer. Extraits de code réels." name=twitter:description><script type=application/ld+json>
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://ferrix.fr/#organization",
+        "name": "Ferrix",
+        "url": "https://ferrix.fr",
+        "logo": "https://ferrix.fr/logo_FERRIX.svg",
+        "image": "https://ferrix.fr/og-image.png",
+        "description": "Développeur Rust freelance — applications métier sur mesure, automatisation et outils internes robustes pour les PME et TPE en France.",
+        "founder": {
+          "@type": "Person",
+          "name": "Maxime",
+          "jobTitle": "Développeur Rust freelance"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "contact-ferrix@proton.me",
+          "contactType": "customer service",
+          "availableLanguage": "French"
+        },
+        "areaServed": "FR",
+        "serviceType": ["Développement Rust sur mesure", "Application métier PME", "Automatisation de processus", "Reprise de code", "Outil interne"],
+        "knowsAbout": ["Rust", "Backend", "CLI", "Application métier", "Automatisation", "PME", "TPE", "Indépendants", "France", "Linux", "CI/CD"],
+        "sameAs": [
+          "https://github.com/blastrider",
+          "https://fr.linkedin.com/in/maxime-gui"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Services Ferrix",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Application métier sur mesure",
+                "description": "Remplacement d'Excel, de logiciel SaaS générique ou d'outil interne inadapté par une application taillée pour le flux de travail réel de l'entreprise."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Automatisation de tâches répétitives",
+                "description": "Identification et automatisation des processus manuels chronophages — pipelines de données, intégrations entre outils, traitements récurrents."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Reprise et assainissement de code existant",
+                "description": "Audit, documentation et refactoring d'outils internes hérités. Livraison de code documenté, maintenable en autonomie par l'entreprise."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://ferrix.fr/#website",
+        "url": "https://ferrix.fr",
+        "name": "Ferrix",
+        "publisher": { "@id": "https://ferrix.fr/#organization" }
+      }
+    ]
+  }
+  </script><link href=https://ferrix.fr/favicon.ico rel=icon sizes=any><link href=https://ferrix.fr/favicon-48x48.png rel=icon sizes=48x48 type=image/png><link href=https://ferrix.fr/favicon.svg rel=icon type=image/svg+xml><link href=https://ferrix.fr/favicon-192.png rel=icon type=image/png><link href=https://ferrix.fr/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" as=style rel=preload><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel=stylesheet></noscript><link href=https://ferrix.fr/style.css rel=stylesheet><body id=top><header class=site-header><div class="container nav-shell"><a aria-label="Retour en haut de page" class=brand href=#top> <img alt=Ferrix class=brand-logo height=40 src=https://ferrix.fr/logo_FERRIX.svg> </a><details class=nav-toggle><summary aria-label="Ouvrir le menu de navigation"><span></span> <span></span> <span></span></summary> <nav aria-label="Navigation principale" class=site-nav><a href=https://ferrix.fr/#top>Accueil</a><a href=https://ferrix.fr/#offres>Offres</a><a href=https://ferrix.fr/blog/>Blog</a><a href=https://ferrix.fr/#contact>Contact</a></nav></details></div></header><main id=contenu><article class="section blog-article"><div class="container article-shell"><nav aria-label="Fil d'Ariane" class=breadcrumb><ol><li><a href=https://ferrix.fr>Accueil</a><li><a href=https://ferrix.fr/blog/>Blog</a><li><a href=https://ferrix.fr/blog/ia-personnelle/>IA personnelle en Rust : construire un assistant souverain, local et sur mesure</a><li><span aria-current=page>Donner une mémoire long-terme à un assistant IA local, sans tout renvoyer au cloud</span></ol></nav><script type=application/ld+json>
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://ferrix.fr"
+    },
+    
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ferrix.fr/blog/"
+    },
+    
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "IA personnelle en Rust : construire un assistant souverain, local et sur mesure",
+      "item": "https://ferrix.fr/blog/ia-personnelle/"
+    },
+    
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Donner une mémoire long-terme à un assistant IA local, sans tout renvoyer au cloud",
+      "item": "https://ferrix.fr/blog/ia-personnelle/memoire-long-terme-assistant-ia-local/"
+    }
+    
+  ]
+}
+</script><header class="article-header reveal"><p class=eyebrow>IA personnelle<h1>Donner une mémoire long-terme à un assistant IA local, sans tout renvoyer au cloud</h1><p class=lead>Comment Aliénor, une IA en Rust, se souvient sur la durée : SQLite comme seule source de vérité, embeddings calculés en local, rappel hybride (lexical + sémantique + graphe) et consolidation qui range la mémoire sans jamais rien supprimer. Extraits de code réels.<div class=blog-card-meta><time datetime=2026-06-30>Publié le 30 June 2026</time><span>· 8 min de lecture</span></div><ul aria-label=Tags class=article-tags><li><a href=https://ferrix.fr/tags/ia-personnelle/>#ia-personnelle</a><li><a href=https://ferrix.fr/tags/rust/>#rust</a><li><a href=https://ferrix.fr/tags/souverainete/>#souveraineté</a><li><a href=https://ferrix.fr/tags/llm-local/>#llm-local</a><li><a href=https://ferrix.fr/tags/memoire/>#mémoire</a></ul></header><div class="blog-content reveal"><p><strong>TL;DR</strong> : Un assistant sans mémoire repart de zéro à chaque conversation. Dans Aliénor, la mémoire long-terme tient dans un seul fichier SQLite (sessions, faits <em>et</em> vecteurs au même endroit), les <em>embeddings</em> sont calculés en local par Ollama, le rappel combine trois signaux (mots-clés, similarité sémantique, graphe de relations), et une consolidation en arrière-plan range la mémoire sans jamais <em>supprimer</em> quoi que ce soit. Cet article montre les extraits de code réels qui font tenir tout ça.<blockquote><p><strong>Note</strong> : Aliénor est mon projet personnel et un véhicule d’apprentissage, pas un produit. Mais les principes décrits ici sont directement transposables aux outils métier que je construis pour des entreprises.</blockquote><h2 id=le-probleme-se-souvenir-mais-sans-fuiter-ni-mentir>Le problème : se souvenir, mais sans fuiter ni mentir</h2><p>Donner une mémoire à un assistant pose trois questions piégeuses :<ol><li><strong>Où la stocker</strong> sans qu’elle parte chez un fournisseur tiers ?<li><strong>Comment retrouver</strong> le bon souvenir au bon moment, parmi des milliers ?<li><strong>Comment éviter</strong> qu’elle se transforme en décharge de doublons et de contradictions qui finit par dégrader les réponses ?</ol><p>La plupart des solutions « assistant à mémoire » répondent à la première question en envoyant tout dans une base vectorielle hébergée. Pour une donnée sensible (dossier client, code interne), c’est exactement ce qu’on cherche à éviter. Aliénor part de la contrainte inverse, posée dès la décision d’architecture qui fonde la mémoire (<code>docs/adr/0003-sqlite-vec-phase2.md</code>) : <em>SQLite est la seule source de vérité, et une donnée confidentielle ne quitte jamais la machine.</em><h2 id=etape-1-tout-dans-un-seul-fichier-vecteurs-compris>Étape 1 : tout dans un seul fichier, vecteurs compris</h2><p>Première décision contre-intuitive : <strong>pas de base vectorielle dédiée</strong>. Les embeddings sont stockés comme un simple <code>BLOB</code> de <code>float32</code> dans la même table SQLite que le reste, et la similarité est calculée en Rust. L’ADR-0003 le tranche noir sur blanc :<blockquote><p><em>« Les embeddings sont stockés dans une colonne <code>embedding BLOB</code> (float32 little-endian) de la table <code>memories</code>. Le calcul cosine est fait en Rust sur le résultat de la requête SQL. […] Zéro dépendance C native, stack 100 % safe Rust. »</em></blockquote><p>La conversion vecteur ↔ octets tient en quelques lignes pures, partagées par tout le code qui manipule des embeddings (<code>crates/alienor-domain/src/vector.rs</code>) :<pre><code data-lang=rust>/// Encode an embedding as little-endian `f32` bytes (4 bytes per dim).
+pub fn embedding_to_bytes(v: &[f32]) -> Vec&lt;u8> {
+    v.iter().flat_map(|f| f.to_le_bytes()).collect()
+}
+</code></pre><p>L’avantage concret n’est pas que technique : <strong>un seul fichier <code>.db</code> contient les sessions, les faits et les vecteurs</strong>. La sauvegarde de la mémoire, c’est la copie d’un fichier. Pas de service externe à synchroniser, rien qui puisse diverger.<h2 id=etape-2-la-similarite-calculee-en-local-et-fail-safe>Étape 2 : la similarité, calculée en local et <em>fail-safe</em></h2><p>Retrouver un souvenir « proche » d’une question, c’est comparer deux vecteurs par similarité cosinus. Le détail qui compte, c’est le comportement aux cas limites : deux vecteurs de tailles différentes, vides, ou nuls ne doivent pas faire planter le rappel ni propager de <code>NaN</code>. La fonction retombe sur <code>0.0</code>, jamais sur une erreur (<code>crates/alienor-domain/src/vector.rs</code>) :<pre><code data-lang=rust>/// Cosine similarity clamped to `[0.0, 1.0]`. Returns `0.0` for empty,
+/// mismatched-length, or zero vectors (no NaN propagation).
+pub fn cosine_similarity(a: &[f32], b: &[f32]) -> f32 {
+    if a.len() != b.len() || a.is_empty() {
+        return 0.0;
+    }
+    let dot: f32 = a.iter().zip(b).map(|(x, y)| x * y).sum();
+    let norm_a: f32 = a.iter().map(|x| x * x).sum::&lt;f32>().sqrt();
+    let norm_b: f32 = b.iter().map(|x| x * x).sum::&lt;f32>().sqrt();
+    if norm_a == 0.0 || norm_b == 0.0 {
+        return 0.0;
+    }
+    (dot / (norm_a * norm_b)).clamp(0.0, 1.0)
+}
+</code></pre><p>Les vecteurs eux-mêmes sont produits par un modèle d’embedding local (<code>nomic-embed-text</code>, 768 dimensions) appelé via Ollama. Rien ne part au cloud, même pour transformer un texte en vecteur : la confidentialité tient <em>aussi</em> à cet endroit, pas seulement au moment de répondre.<h2 id=etape-3-un-rappel-hybride-pas-seulement-semantique>Étape 3 : un rappel hybride, pas seulement « sémantique »</h2><p>La recherche purement sémantique a un défaut : elle rate les correspondances exactes (un nom propre, une référence, un code produit) que de simples mots-clés trouveraient immédiatement. Aliénor combine donc <strong>trois signaux</strong> pondérés (<code>crates/alienor-memory/src/recall/mod.rs</code>) :<pre><code data-lang=rust>impl Default for RecallWeights {
+    fn default() -> Self {
+        Self {
+            lexical: 0.3,   // FTS5 BM25 (mots-clés)
+            semantic: 0.5,  // similarité cosinus (sens)
+            graph: 0.2,     // bonus de relation à 1 saut
+        }
+    }
+}
+</code></pre><p>Concrètement, pour une question donnée, le store fait une passe par mots-clés (jusqu’à 50 candidats via le moteur plein-texte FTS5 de SQLite), une passe par similarité (top-50 par cosinus), puis ajoute un <strong>bonus de graphe</strong> : si un souvenir est relié à un souvenir déjà retenu, il remonte dans le classement. Les souvenirs ne vivent pas isolés, ils forment un réseau.<blockquote><p><strong>À retenir</strong> : « mémoire IA » ne veut pas dire « tout balancer dans une base vectorielle ». Le bon rappel mélange le littéral (mots exacts), le sémantique (le sens) et le relationnel (le contexte autour). Chacun rattrape les angles morts des autres.</blockquote><h2 id=etape-4-le-filtre-de-confidentialite-vit-dans-la-requete-sql>Étape 4 : le filtre de confidentialité vit <em>dans la requête SQL</em></h2><p>Le rappel pourrait, par accident, remonter une mémoire plus sensible que la session en cours. Pour rendre ça impossible, le filtre de confidentialité n’est pas appliqué <em>après coup</em> en Rust : il est inscrit dans la requête SQL elle-même. L’ADR-0003 en fait un invariant (D5) :<blockquote><p><em>« Appliqué en SQL, pas en post-filtrage Rust. Garantit qu’aucun chemin de code ne peut retourner une mémoire plus confidentielle que la session courante. »</em></blockquote><p>C’est le même principe que pour <a href=https://ferrix.fr/blog/ia-personnelle/donnee-confidentielle-jamais-cloud-par-le-code/>le routage local/cloud</a> : la règle est placée à un endroit où il est structurellement impossible de la contourner, pas laissée à la discipline du développeur.<h2 id=etape-5-consolider-sans-jamais-supprimer>Étape 5 : consolider sans jamais supprimer</h2><p>Une mémoire qui grandit sans entretien finit par accumuler la même préférence reformulée cinq fois, des faits jamais réutilisés, et des contradictions que rien ne résout. Aliénor fait tourner en arrière-plan une <strong>consolidation</strong> en trois temps (<code>crates/alienor-cognition/</code>) : regrouper les souvenirs très proches (cosinus ≥ 0,92), les fusionner via le modèle local, puis faire décroître l’importance des souvenirs jamais réutilisés.<p>Deux garde-fous rendent l’opération sûre.<p><strong>D’abord, on n’efface jamais.</strong> Tout ce qui sort de la table active est <em>archivé</em>, avec la raison et un dump complet, jamais supprimé (ADR-0014) :<blockquote><p><em>« Pas de suppression hard. Tout ce qui sort de <code>memories</code> passe en <code>memory_archive</code> avec timestamp et raison. Rien n’est jamais perdu, on peut reconstituer. »</em></blockquote><p><strong>Ensuite, une fusion peu sûre est refusée.</strong> Le risque, quand un LLM résume cinq souvenirs en un, c’est qu’il <em>invente</em>. La fusion demande donc au modèle un score de confiance, et sous le seuil, on jette la fusion plutôt que de polluer la mémoire (<code>crates/alienor-cognition/src/consolidator/merge.rs</code>) :<pre><code data-lang=rust>const MIN_CONFIDENCE: f32 = 0.7;
+
+// ...
+if parsed.confidence &lt; MIN_CONFIDENCE {
+    warn!(
+        confidence = parsed.confidence,
+        "merge: confidence too low, skipping cluster"
+    );
+    return Ok(None);
+}
+</code></pre><p>Et ce n’est pas le seul cas : une erreur réseau, un flux interrompu ou un JSON illisible renvoient aussi <code>Ok(None)</code>. La règle est uniforme : <strong>en cas de doute, on ne fusionne pas.</strong> Le pire cas est de garder deux souvenirs séparés, jamais de créer un faux souvenir.<blockquote><p><strong>À retenir</strong> : la qualité d’une mémoire long-terme ne tient pas qu’à ce qu’elle retient, mais à ce qu’elle refuse de faire. Archiver plutôt que supprimer, et renoncer à une fusion douteuse, c’est ce qui sépare un assistant qui s’améliore avec le temps d’un assistant qui dérive lentement vers le faux.</blockquote><h2 id=ce-que-ca-change-pour-une-pme-une-tpe-ou-un-independant>Ce que ça change pour une PME, une TPE ou un indépendant</h2><p>L’équivalent côté entreprise, ce serait un assistant qui connaît vos dossiers récurrents, vos process internes et le vocabulaire de votre métier, sans qu’on ait à tout lui réexpliquer chaque matin, et sans que ces informations partent chez un tiers. Trois principes transposables, quelle que soit la taille du projet :<ul><li><strong>La mémoire d’un outil métier peut tenir en local.</strong> Un fichier qu’on sauvegarde d’une copie vaut mieux qu’un service externe de plus à sécuriser.<li><strong>Bien retrouver l’information, c’est mélanger les approches.</strong> Le tout-sémantique est à la mode mais rate les correspondances exactes ; un bon outil combine plusieurs signaux.<li><strong>Un système qui se nettoie tout seul doit le faire prudemment.</strong> Archiver au lieu de supprimer, et refuser une opération incertaine, ça se conçoit dès le départ.</ul><p>C’est précisément ce type de garantie que j’intègre dans les outils que je construis. <a href=https://ferrix.fr/#contact rel=external>Décrivez votre besoin</a> et on regarde ensemble ce qui est pertinent pour votre cas.<h2 id=faq>FAQ</h2><h3 id=pourquoi-sqlite-plutot-qu-une-vraie-base-vectorielle>Pourquoi SQLite plutôt qu’une vraie base vectorielle ?</h3><p>Parce que pour le volume visé (quelques milliers à quelques dizaines de milliers de souvenirs), un scan en mémoire avec calcul cosinus en Rust est largement assez rapide, et que tout tient alors dans un seul fichier facile à sauvegarder. Une base vectorielle dédiée se justifie à plus grande échelle ; l’architecture d’Aliénor prévoit d’ailleurs explicitement de la reconsidérer au-delà d’un seuil mesuré.<h3 id=les-embeddings-partent-ils-au-cloud>Les embeddings partent-ils au cloud ?</h3><p>Non. Le modèle d’embedding (<code>nomic-embed-text</code>) tourne en local via Ollama. La transformation d’un texte en vecteur ne sort jamais de la machine, au même titre que les réponses sur données confidentielles.<h3 id=comment-l-assistant-retrouve-t-il-le-bon-souvenir>Comment l’assistant retrouve-t-il le bon souvenir ?</h3><p>Par un rappel hybride : une recherche par mots-clés, une recherche par similarité de sens, et un bonus pour les souvenirs reliés à ceux déjà retenus. Les trois scores sont pondérés et combinés, ce qui rattrape à la fois les correspondances exactes et les reformulations.<h3 id=la-consolidation-peut-elle-detruire-une-information-importante>La consolidation peut-elle détruire une information importante ?</h3><p>Non : rien n’est supprimé, tout ce qui sort de la mémoire active est archivé avec sa raison et peut être reconstitué. Et une fusion dont le modèle n’est pas suffisamment sûr (score sous le seuil) est rejetée plutôt qu’appliquée.<h3 id=peut-on-appliquer-ca-a-un-outil-d-entreprise-plus-simple>Peut-on appliquer ça à un outil d’entreprise plus simple ?</h3><p>Oui. Stockage local dans un fichier, rappel combinant plusieurs signaux, nettoyage prudent qui archive au lieu de supprimer : ces principes ne dépendent pas de la taille du projet.<h2 id=pour-aller-plus-loin>Pour aller plus loin</h2><p>Cet article fait partie d’une série sur la construction d’Aliénor. Retournez à la <a href=https://ferrix.fr/blog/ia-personnelle/>présentation de la série</a> pour la vue d’ensemble, lisez <a href=https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/>pourquoi et comment j’ai construit cette IA</a>, ou voyez comment <a href=https://ferrix.fr/blog/ia-personnelle/donnee-confidentielle-jamais-cloud-par-le-code/>une donnée confidentielle ne part jamais au cloud</a>.</div><aside aria-label="Articles liés" class="article-silo-links reveal"><h2>À lire aussi sur « IA personnelle en Rust : construire un assistant souverain, local et sur mesure »</h2><ul><li class=pillar-link><a href=https://ferrix.fr/blog/ia-personnelle/>IA personnelle en Rust : construire un assistant souverain, local et sur mesure</a> <span>Vue d'ensemble de la thématique</span><li><a href=https://ferrix.fr/blog/ia-personnelle/donnee-confidentielle-jamais-cloud-par-le-code/>Garantir qu'une donnée confidentielle ne parte jamais au cloud : par le code, pas par une option</a> <span>Comment Aliénor, une IA en Rust, empêche structurellement une donnée sensible de partir ve…</span><li><a href=https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/>J'ai construit ma propre IA personnelle en Rust : pourquoi et comment</a> <span>Retour d'expérience sur Aliénor : une IA personnelle hybride local/cloud en Rust, à mémoir…</span></ul></aside><aside aria-label="Autres thématiques" class="other-silos reveal"><h2>Explorer les autres thématiques</h2><ul class=other-silos-list><li><a href=https://ferrix.fr/blog/automatisation/ style=--silo-color:#e05c2a> <span class=other-silo-name>Automatiser les tâches répétitives d'une PME : le guide complet</span> <span class=other-silo-desc>Automatisation pour PME et TPE : pourquoi, quand et comment automatiser les tâches manuelles répétitives sans …</span> </a></ul></aside><footer class="article-footer reveal"><a class="button button-secondary" href=https://ferrix.fr/blog/ia-personnelle/>← Tous les articles de la thématique</a><a class="button button-primary" href=https://ferrix.fr/#contact>Décrire mon besoin</a></footer></div></article><script type=application/ld+json>
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Donner une mémoire long-terme à un assistant IA local, sans tout renvoyer au cloud",
+  "description": "Comment Aliénor, une IA en Rust, se souvient sur la durée : SQLite comme seule source de vérité, embeddings calculés en local, rappel hybride (lexical + sémantique + graphe) et consolidation qui range la mémoire sans jamais rien supprimer. Extraits de code réels.",
+  "url": "https://ferrix.fr/blog/ia-personnelle/memoire-long-terme-assistant-ia-local/",
+  "image": "https://ferrix.fr/og-image.png",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ferrix.fr/blog/ia-personnelle/memoire-long-terme-assistant-ia-local/" },
+  "datePublished": "2026-06-30",
+  "dateModified": "2026-06-30",
+  "inLanguage": "fr-FR",
+  "isPartOf": { "@type": "Blog", "@id": "https://ferrix.fr/blog/", "name": "Blog Ferrix" },
+  "articleSection": "IA personnelle en Rust : construire un assistant souverain, local et sur mesure",
+  "keywords": "ia-personnelle, rust, souveraineté, llm-local, mémoire",
+  "author": {
+    "@type": "Person",
+    "name": "Maxime",
+    "url": "https://ferrix.fr"
+  },
+  "publisher": { "@id": "https://ferrix.fr/#organization" }
+}
+</script></main><footer class=site-footer><div class="container footer-shell"><p>Ferrix · Développeur Rust freelance · PME, TPE & indépendants<nav aria-label="Profils sociaux" class=social-links><a rel="noopener noreferrer me" class=social-link href=https://github.com/blastrider target=_blank title=GitHub> <svg viewbox="0 0 24 24" aria-hidden=true fill=currentColor focusable=false xmlns=http://www.w3.org/2000/svg><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> <span class=sr-only>GitHub</span> </a><a rel="noopener noreferrer me" class=social-link href=https://www.linkedin.com/in/guimaxali target=_blank title=LinkedIn> <svg viewbox="0 0 24 24" aria-hidden=true fill=currentColor focusable=false xmlns=http://www.w3.org/2000/svg><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> <span class=sr-only>LinkedIn</span> </a></nav></div></footer><script>const io=new IntersectionObserver((entries)=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add("is-visible")),{threshold:.14});
+    document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+    const header=document.querySelector(".site-header");
+    const menu=document.querySelector(".nav-toggle");
+    addEventListener("scroll",()=>header.classList.toggle("is-scrolled",scrollY>12),{passive:true});
+    document.querySelectorAll('.site-nav a').forEach(a=>a.addEventListener("click",()=>menu&&menu.removeAttribute("open")));</script>

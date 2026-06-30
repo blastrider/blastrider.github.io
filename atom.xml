@@ -5,8 +5,221 @@
     <link rel="self" type="application/atom+xml" href="https://ferrix.fr/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://ferrix.fr"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2026-06-19T00:00:00+00:00</updated>
+    <updated>2026-06-30T00:00:00+00:00</updated>
     <id>https://ferrix.fr/atom.xml</id>
+    <entry xml:lang="fr">
+        <title>Donner une mémoire long-terme à un assistant IA local, sans tout renvoyer au cloud</title>
+        <published>2026-06-30T00:00:00+00:00</published>
+        <updated>2026-06-30T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ferrix.fr/blog/ia-personnelle/memoire-long-terme-assistant-ia-local/"/>
+        <id>https://ferrix.fr/blog/ia-personnelle/memoire-long-terme-assistant-ia-local/</id>
+        
+        <content type="html" xml:base="https://ferrix.fr/blog/ia-personnelle/memoire-long-terme-assistant-ia-local/">&lt;p&gt;&lt;strong&gt;TL;DR&lt;&#x2F;strong&gt; : Un assistant sans mémoire repart de zéro à chaque conversation. Dans
+Aliénor, la mémoire long-terme tient dans un seul fichier SQLite (sessions, faits
+&lt;em&gt;et&lt;&#x2F;em&gt; vecteurs au même endroit), les &lt;em&gt;embeddings&lt;&#x2F;em&gt; sont calculés en local par Ollama,
+le rappel combine trois signaux (mots-clés, similarité sémantique, graphe de
+relations), et une consolidation en arrière-plan range la mémoire sans jamais
+&lt;em&gt;supprimer&lt;&#x2F;em&gt; quoi que ce soit. Cet article montre les extraits de code réels qui font tenir tout ça.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;&#x2F;strong&gt; : Aliénor est mon projet personnel et un véhicule d’apprentissage, pas un
+produit. Mais les principes décrits ici sont directement transposables aux outils
+métier que je construis pour des entreprises.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;le-probleme-se-souvenir-mais-sans-fuiter-ni-mentir&quot;&gt;Le problème : se souvenir, mais sans fuiter ni mentir&lt;&#x2F;h2&gt;
+&lt;p&gt;Donner une mémoire à un assistant pose trois questions piégeuses :&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Où la stocker&lt;&#x2F;strong&gt; sans qu’elle parte chez un fournisseur tiers ?&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Comment retrouver&lt;&#x2F;strong&gt; le bon souvenir au bon moment, parmi des milliers ?&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Comment éviter&lt;&#x2F;strong&gt; qu’elle se transforme en décharge de doublons et de
+contradictions qui finit par dégrader les réponses ?&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;La plupart des solutions « assistant à mémoire » répondent à la première question
+en envoyant tout dans une base vectorielle hébergée. Pour une donnée sensible
+(dossier client, code interne), c’est exactement ce qu’on cherche à éviter. Aliénor
+part de la contrainte inverse, posée dès la décision d’architecture qui fonde la
+mémoire (&lt;code&gt;docs&#x2F;adr&#x2F;0003-sqlite-vec-phase2.md&lt;&#x2F;code&gt;) : &lt;em&gt;SQLite est la seule source de
+vérité, et une donnée confidentielle ne quitte jamais la machine.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;etape-1-tout-dans-un-seul-fichier-vecteurs-compris&quot;&gt;Étape 1 : tout dans un seul fichier, vecteurs compris&lt;&#x2F;h2&gt;
+&lt;p&gt;Première décision contre-intuitive : &lt;strong&gt;pas de base vectorielle dédiée&lt;&#x2F;strong&gt;. Les
+embeddings sont stockés comme un simple &lt;code&gt;BLOB&lt;&#x2F;code&gt; de &lt;code&gt;float32&lt;&#x2F;code&gt; dans la même table
+SQLite que le reste, et la similarité est calculée en Rust. L’ADR-0003 le tranche
+noir sur blanc :&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;« Les embeddings sont stockés dans une colonne &lt;code&gt;embedding BLOB&lt;&#x2F;code&gt; (float32
+little-endian) de la table &lt;code&gt;memories&lt;&#x2F;code&gt;. Le calcul cosine est fait en Rust sur le
+résultat de la requête SQL. […] Zéro dépendance C native, stack 100 % safe Rust. »&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;La conversion vecteur ↔ octets tient en quelques lignes pures, partagées par tout
+le code qui manipule des embeddings (&lt;code&gt;crates&#x2F;alienor-domain&#x2F;src&#x2F;vector.rs&lt;&#x2F;code&gt;) :&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;rust&quot;&gt;&#x2F;&#x2F;&#x2F; Encode an embedding as little-endian `f32` bytes (4 bytes per dim).
+pub fn embedding_to_bytes(v: &amp;amp;[f32]) -&amp;gt; Vec&amp;lt;u8&amp;gt; {
+    v.iter().flat_map(|f| f.to_le_bytes()).collect()
+}
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;L’avantage concret n’est pas que technique : &lt;strong&gt;un seul fichier &lt;code&gt;.db&lt;&#x2F;code&gt; contient les
+sessions, les faits et les vecteurs&lt;&#x2F;strong&gt;. La sauvegarde de la mémoire, c’est la copie
+d’un fichier. Pas de service externe à synchroniser, rien qui puisse diverger.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;etape-2-la-similarite-calculee-en-local-et-fail-safe&quot;&gt;Étape 2 : la similarité, calculée en local et &lt;em&gt;fail-safe&lt;&#x2F;em&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Retrouver un souvenir « proche » d’une question, c’est comparer deux vecteurs par
+similarité cosinus. Le détail qui compte, c’est le comportement aux cas limites :
+deux vecteurs de tailles différentes, vides, ou nuls ne doivent pas faire planter
+le rappel ni propager de &lt;code&gt;NaN&lt;&#x2F;code&gt;. La fonction retombe sur &lt;code&gt;0.0&lt;&#x2F;code&gt;, jamais sur une
+erreur (&lt;code&gt;crates&#x2F;alienor-domain&#x2F;src&#x2F;vector.rs&lt;&#x2F;code&gt;) :&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;rust&quot;&gt;&#x2F;&#x2F;&#x2F; Cosine similarity clamped to `[0.0, 1.0]`. Returns `0.0` for empty,
+&#x2F;&#x2F;&#x2F; mismatched-length, or zero vectors (no NaN propagation).
+pub fn cosine_similarity(a: &amp;amp;[f32], b: &amp;amp;[f32]) -&amp;gt; f32 {
+    if a.len() != b.len() || a.is_empty() {
+        return 0.0;
+    }
+    let dot: f32 = a.iter().zip(b).map(|(x, y)| x * y).sum();
+    let norm_a: f32 = a.iter().map(|x| x * x).sum::&amp;lt;f32&amp;gt;().sqrt();
+    let norm_b: f32 = b.iter().map(|x| x * x).sum::&amp;lt;f32&amp;gt;().sqrt();
+    if norm_a == 0.0 || norm_b == 0.0 {
+        return 0.0;
+    }
+    (dot &#x2F; (norm_a * norm_b)).clamp(0.0, 1.0)
+}
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Les vecteurs eux-mêmes sont produits par un modèle d’embedding local
+(&lt;code&gt;nomic-embed-text&lt;&#x2F;code&gt;, 768 dimensions) appelé via Ollama. Rien ne part au cloud, même
+pour transformer un texte en vecteur : la confidentialité tient &lt;em&gt;aussi&lt;&#x2F;em&gt; à cet
+endroit, pas seulement au moment de répondre.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;etape-3-un-rappel-hybride-pas-seulement-semantique&quot;&gt;Étape 3 : un rappel hybride, pas seulement « sémantique »&lt;&#x2F;h2&gt;
+&lt;p&gt;La recherche purement sémantique a un défaut : elle rate les correspondances
+exactes (un nom propre, une référence, un code produit) que de simples mots-clés
+trouveraient immédiatement. Aliénor combine donc &lt;strong&gt;trois signaux&lt;&#x2F;strong&gt; pondérés
+(&lt;code&gt;crates&#x2F;alienor-memory&#x2F;src&#x2F;recall&#x2F;mod.rs&lt;&#x2F;code&gt;) :&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;rust&quot;&gt;impl Default for RecallWeights {
+    fn default() -&amp;gt; Self {
+        Self {
+            lexical: 0.3,   &#x2F;&#x2F; FTS5 BM25 (mots-clés)
+            semantic: 0.5,  &#x2F;&#x2F; similarité cosinus (sens)
+            graph: 0.2,     &#x2F;&#x2F; bonus de relation à 1 saut
+        }
+    }
+}
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Concrètement, pour une question donnée, le store fait une passe par mots-clés
+(jusqu’à 50 candidats via le moteur plein-texte FTS5 de SQLite), une passe par
+similarité (top-50 par cosinus), puis ajoute un &lt;strong&gt;bonus de graphe&lt;&#x2F;strong&gt; : si un souvenir
+est relié à un souvenir déjà retenu, il remonte dans le classement. Les souvenirs
+ne vivent pas isolés, ils forment un réseau.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;À retenir&lt;&#x2F;strong&gt; : « mémoire IA » ne veut pas dire « tout balancer dans une base
+vectorielle ». Le bon rappel mélange le littéral (mots exacts), le sémantique
+(le sens) et le relationnel (le contexte autour). Chacun rattrape les angles
+morts des autres.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;etape-4-le-filtre-de-confidentialite-vit-dans-la-requete-sql&quot;&gt;Étape 4 : le filtre de confidentialité vit &lt;em&gt;dans la requête SQL&lt;&#x2F;em&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Le rappel pourrait, par accident, remonter une mémoire plus sensible que la session
+en cours. Pour rendre ça impossible, le filtre de confidentialité n’est pas appliqué
+&lt;em&gt;après coup&lt;&#x2F;em&gt; en Rust : il est inscrit dans la requête SQL elle-même. L’ADR-0003 en
+fait un invariant (D5) :&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;« Appliqué en SQL, pas en post-filtrage Rust. Garantit qu’aucun chemin de code
+ne peut retourner une mémoire plus confidentielle que la session courante. »&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;C’est le même principe que pour &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;ia-personnelle&#x2F;donnee-confidentielle-jamais-cloud-par-le-code&#x2F;&quot;&gt;le routage local&#x2F;cloud&lt;&#x2F;a&gt; :
+la règle est placée à un endroit où il est structurellement impossible de la
+contourner, pas laissée à la discipline du développeur.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;etape-5-consolider-sans-jamais-supprimer&quot;&gt;Étape 5 : consolider sans jamais supprimer&lt;&#x2F;h2&gt;
+&lt;p&gt;Une mémoire qui grandit sans entretien finit par accumuler la même préférence
+reformulée cinq fois, des faits jamais réutilisés, et des contradictions que rien
+ne résout. Aliénor fait tourner en arrière-plan une &lt;strong&gt;consolidation&lt;&#x2F;strong&gt; en trois
+temps (&lt;code&gt;crates&#x2F;alienor-cognition&#x2F;&lt;&#x2F;code&gt;) : regrouper les souvenirs très proches
+(cosinus ≥ 0,92), les fusionner via le modèle local, puis faire décroître
+l’importance des souvenirs jamais réutilisés.&lt;&#x2F;p&gt;
+&lt;p&gt;Deux garde-fous rendent l’opération sûre.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;D’abord, on n’efface jamais.&lt;&#x2F;strong&gt; Tout ce qui sort de la table active est &lt;em&gt;archivé&lt;&#x2F;em&gt;,
+avec la raison et un dump complet, jamais supprimé (ADR-0014) :&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;« Pas de suppression hard. Tout ce qui sort de &lt;code&gt;memories&lt;&#x2F;code&gt; passe en
+&lt;code&gt;memory_archive&lt;&#x2F;code&gt; avec timestamp et raison. Rien n’est jamais perdu, on peut
+reconstituer. »&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Ensuite, une fusion peu sûre est refusée.&lt;&#x2F;strong&gt; Le risque, quand un LLM résume cinq
+souvenirs en un, c’est qu’il &lt;em&gt;invente&lt;&#x2F;em&gt;. La fusion demande donc au modèle un score
+de confiance, et sous le seuil, on jette la fusion plutôt que de polluer la mémoire
+(&lt;code&gt;crates&#x2F;alienor-cognition&#x2F;src&#x2F;consolidator&#x2F;merge.rs&lt;&#x2F;code&gt;) :&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code data-lang=&quot;rust&quot;&gt;const MIN_CONFIDENCE: f32 = 0.7;
+
+&#x2F;&#x2F; ...
+if parsed.confidence &amp;lt; MIN_CONFIDENCE {
+    warn!(
+        confidence = parsed.confidence,
+        &amp;quot;merge: confidence too low, skipping cluster&amp;quot;
+    );
+    return Ok(None);
+}
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Et ce n’est pas le seul cas : une erreur réseau, un flux interrompu ou un JSON
+illisible renvoient aussi &lt;code&gt;Ok(None)&lt;&#x2F;code&gt;. La règle est uniforme : &lt;strong&gt;en cas de doute,
+on ne fusionne pas.&lt;&#x2F;strong&gt; Le pire cas est de garder deux souvenirs séparés, jamais de
+créer un faux souvenir.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;À retenir&lt;&#x2F;strong&gt; : la qualité d’une mémoire long-terme ne tient pas qu’à ce qu’elle
+retient, mais à ce qu’elle refuse de faire. Archiver plutôt que supprimer, et
+renoncer à une fusion douteuse, c’est ce qui sépare un assistant qui s’améliore
+avec le temps d’un assistant qui dérive lentement vers le faux.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;ce-que-ca-change-pour-une-pme-une-tpe-ou-un-independant&quot;&gt;Ce que ça change pour une PME, une TPE ou un indépendant&lt;&#x2F;h2&gt;
+&lt;p&gt;L’équivalent côté entreprise, ce serait un assistant qui connaît vos dossiers
+récurrents, vos process internes et le vocabulaire de votre métier, sans qu’on ait
+à tout lui réexpliquer chaque matin, et sans que ces informations partent chez un
+tiers. Trois principes transposables, quelle que soit la taille du projet :&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;La mémoire d’un outil métier peut tenir en local.&lt;&#x2F;strong&gt; Un fichier qu’on sauvegarde
+d’une copie vaut mieux qu’un service externe de plus à sécuriser.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Bien retrouver l’information, c’est mélanger les approches.&lt;&#x2F;strong&gt; Le tout-sémantique
+est à la mode mais rate les correspondances exactes ; un bon outil combine
+plusieurs signaux.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Un système qui se nettoie tout seul doit le faire prudemment.&lt;&#x2F;strong&gt; Archiver au lieu
+de supprimer, et refuser une opération incertaine, ça se conçoit dès le départ.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;C’est précisément ce type de garantie que j’intègre dans les outils que je construis.
+&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;#contact&quot;&gt;Décrivez votre besoin&lt;&#x2F;a&gt; et on regarde ensemble ce qui est
+pertinent pour votre cas.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;faq&quot;&gt;FAQ&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;pourquoi-sqlite-plutot-qu-une-vraie-base-vectorielle&quot;&gt;Pourquoi SQLite plutôt qu’une vraie base vectorielle ?&lt;&#x2F;h3&gt;
+&lt;p&gt;Parce que pour le volume visé (quelques milliers à quelques dizaines de milliers de
+souvenirs), un scan en mémoire avec calcul cosinus en Rust est largement assez
+rapide, et que tout tient alors dans un seul fichier facile à sauvegarder. Une base
+vectorielle dédiée se justifie à plus grande échelle ; l’architecture d’Aliénor
+prévoit d’ailleurs explicitement de la reconsidérer au-delà d’un seuil mesuré.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;les-embeddings-partent-ils-au-cloud&quot;&gt;Les embeddings partent-ils au cloud ?&lt;&#x2F;h3&gt;
+&lt;p&gt;Non. Le modèle d’embedding (&lt;code&gt;nomic-embed-text&lt;&#x2F;code&gt;) tourne en local via Ollama. La
+transformation d’un texte en vecteur ne sort jamais de la machine, au même titre
+que les réponses sur données confidentielles.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;comment-l-assistant-retrouve-t-il-le-bon-souvenir&quot;&gt;Comment l’assistant retrouve-t-il le bon souvenir ?&lt;&#x2F;h3&gt;
+&lt;p&gt;Par un rappel hybride : une recherche par mots-clés, une recherche par similarité
+de sens, et un bonus pour les souvenirs reliés à ceux déjà retenus. Les trois
+scores sont pondérés et combinés, ce qui rattrape à la fois les correspondances
+exactes et les reformulations.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;la-consolidation-peut-elle-detruire-une-information-importante&quot;&gt;La consolidation peut-elle détruire une information importante ?&lt;&#x2F;h3&gt;
+&lt;p&gt;Non : rien n’est supprimé, tout ce qui sort de la mémoire active est archivé avec sa
+raison et peut être reconstitué. Et une fusion dont le modèle n’est pas suffisamment
+sûr (score sous le seuil) est rejetée plutôt qu’appliquée.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;peut-on-appliquer-ca-a-un-outil-d-entreprise-plus-simple&quot;&gt;Peut-on appliquer ça à un outil d’entreprise plus simple ?&lt;&#x2F;h3&gt;
+&lt;p&gt;Oui. Stockage local dans un fichier, rappel combinant plusieurs signaux, nettoyage
+prudent qui archive au lieu de supprimer : ces principes ne dépendent pas de la
+taille du projet.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;pour-aller-plus-loin&quot;&gt;Pour aller plus loin&lt;&#x2F;h2&gt;
+&lt;p&gt;Cet article fait partie d’une série sur la construction d’Aliénor. Retournez à la
+&lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;ia-personnelle&#x2F;&quot;&gt;présentation de la série&lt;&#x2F;a&gt; pour la vue d’ensemble,
+lisez &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;ia-personnelle&#x2F;ia-personnelle-rust-pourquoi-comment&#x2F;&quot;&gt;pourquoi et comment j’ai construit cette IA&lt;&#x2F;a&gt;,
+ou voyez comment &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;ia-personnelle&#x2F;donnee-confidentielle-jamais-cloud-par-le-code&#x2F;&quot;&gt;une donnée confidentielle ne part jamais au cloud&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
     <entry xml:lang="fr">
         <title>Garantir qu&#x27;une donnée confidentielle ne parte jamais au cloud : par le code, pas par une option</title>
         <published>2026-06-19T00:00:00+00:00</published>
@@ -336,7 +549,7 @@ publiés au fil de l’eau. Retournez à la
     <entry xml:lang="fr">
         <title>Pourquoi vos scripts d&#x27;automatisation cassent (et comment l&#x27;éviter)</title>
         <published>2026-06-15T00:00:00+00:00</published>
-        <updated>2026-06-15T00:00:00+00:00</updated>
+        <updated>2026-06-30T00:00:00+00:00</updated>
         
         <author>
           <name>
@@ -409,7 +622,7 @@ voir &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;automatisation&
     <entry xml:lang="fr">
         <title>Comment identifier les tâches à automatiser en priorité dans votre entreprise</title>
         <published>2026-06-10T00:00:00+00:00</published>
-        <updated>2026-06-10T00:00:00+00:00</updated>
+        <updated>2026-06-30T00:00:00+00:00</updated>
         
         <author>
           <name>
