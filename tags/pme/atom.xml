@@ -25,27 +25,57 @@
         
         <content type="html" xml:base="https://ferrix.fr/blog/automatisation/identifier-taches-a-automatiser/">&lt;p&gt;Avant d’automatiser quoi que ce soit, il faut savoir &lt;strong&gt;quoi&lt;&#x2F;strong&gt; automatiser. Toutes
 les tâches répétitives ne se valent pas : certaines vous font gagner une journée
-par mois, d’autres dix minutes par an. Voici comment faire le tri.&lt;&#x2F;p&gt;
+par mois, d’autres dix minutes par an. Et la plus tentante à automatiser n’est
+presque jamais la plus rentable. Voici comment faire le tri avant d’écrire la
+moindre ligne de code.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;la-regle-du-frequent-x-chronophage-x-risque&quot;&gt;La règle du « fréquent × chronophage × risqué »&lt;&#x2F;h2&gt;
 &lt;p&gt;Une tâche est un bon candidat à l’automatisation quand elle coche trois cases :&lt;&#x2F;p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Fréquente&lt;&#x2F;strong&gt; — vous la faites chaque jour, chaque semaine ou à chaque commande.&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Chronophage&lt;&#x2F;strong&gt; — elle prend du temps à chaque fois.&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Risquée&lt;&#x2F;strong&gt; — une erreur humaine y a des conséquences (facture fausse, donnée perdue).&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Fréquente&lt;&#x2F;strong&gt; : vous la faites chaque jour, chaque semaine ou à chaque commande.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Chronophage&lt;&#x2F;strong&gt; : elle prend du temps à chaque fois.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Risquée&lt;&#x2F;strong&gt; : une erreur humaine y a des conséquences (facture fausse, donnée perdue).&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
-&lt;p&gt;Multipliez ces trois facteurs : les tâches en haut du classement sont celles à
-traiter en premier.&lt;&#x2F;p&gt;
+&lt;p&gt;L’important, c’est de &lt;strong&gt;multiplier&lt;&#x2F;strong&gt; ces trois facteurs, pas de les additionner.
+Une tâche que vous faites tous les jours mais qui prend dix secondes ne vaut pas
+qu’on s’en occupe. Une tâche rare mais qui, le jour où elle se fait mal, vous
+coûte une journée de rattrapage, oui. Les tâches en haut du classement sont celles
+à traiter en premier ; tout le reste peut attendre.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;un-exemple-concret&quot;&gt;Un exemple concret&lt;&#x2F;h3&gt;
+&lt;p&gt;Prenons une TPE qui facture une vingtaine de clients par mois. Saisir chaque
+facture à la main prend cinq minutes, soit moins de deux heures mensuelles : peu
+fréquent à l’échelle d’une journée, peu risqué si on relit. Ce n’est pas la
+priorité. En revanche, recopier chaque mois les mêmes chiffres dans trois outils
+différents (compta, tableur de suivi, relance client) est fréquent, chronophage
+&lt;strong&gt;et&lt;&#x2F;strong&gt; risqué : une coquille se propage partout et ne se voit qu’au moment du
+bilan. C’est ce recopiage, pas la facturation elle-même, qu’il faut automatiser
+en premier.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;faites-l-inventaire-sur-une-semaine&quot;&gt;Faites l’inventaire sur une semaine&lt;&#x2F;h2&gt;
-&lt;p&gt;Pendant une semaine, notez chaque tâche manuelle répétitive et le temps qu’elle
-prend. Vous serez surpris de voir où part réellement votre temps — c’est rarement
-là où on l’imagine.&lt;&#x2F;p&gt;
+&lt;p&gt;La méthode la plus fiable n’est pas de réfléchir dans l’abstrait, c’est de
+mesurer. Pendant une semaine, notez chaque tâche manuelle répétitive et le temps
+qu’elle prend, même approximativement. Une simple feuille à trois colonnes suffit :
+&lt;em&gt;la tâche&lt;&#x2F;em&gt;, &lt;em&gt;combien de fois&lt;&#x2F;em&gt;, &lt;em&gt;combien de temps&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Vous serez surpris de voir où part réellement votre temps : c’est rarement là où
+on l’imagine. Les vrais gouffres sont souvent des micro-tâches invisibles (copier-
+coller, renommer des fichiers, vérifier un statut) qu’on ne compte jamais parce
+qu’elles ne prennent « que deux minutes »… trente fois par jour.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;ne-tombez-pas-dans-le-piege-du-tout-automatiser&quot;&gt;Ne tombez pas dans le piège du « tout automatiser »&lt;&#x2F;h2&gt;
-&lt;p&gt;Automatiser un processus qui change sans cesse coûte plus cher qu’il ne rapporte.
-Concentrez-vous sur le stable et le répétitif. Pour comprendre où placer la limite,
+&lt;p&gt;Une fois la mécanique comprise, la tentation est d’automatiser tout ce qui bouge.
+C’est une erreur coûteuse. Automatiser un processus qui change sans cesse revient
+à réécrire l’outil à chaque changement : il vous coûte plus en maintenance qu’il
+ne vous fait gagner.&lt;&#x2F;p&gt;
+&lt;p&gt;Deux signaux qu’une tâche n’est &lt;strong&gt;pas&lt;&#x2F;strong&gt; prête à être automatisée :&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Elle change encore tous les mois.&lt;&#x2F;strong&gt; Attendez qu’elle se stabilise.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Personne ne sait l’expliquer entièrement.&lt;&#x2F;strong&gt; Si la règle exacte vit dans la
+tête d’une seule personne, commencez par l’écrire noir sur blanc. On
+n’automatise bien que ce qu’on comprend complètement.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Concentrez-vous sur le stable et le répétitif. Pour comprendre où placer la limite,
 voir le &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;automatisation&#x2F;&quot;&gt;guide d’ensemble sur l’automatisation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;etape-suivante&quot;&gt;Étape suivante&lt;&#x2F;h2&gt;
 &lt;p&gt;Une fois vos priorités identifiées, l’enjeu devient la &lt;strong&gt;fiabilité&lt;&#x2F;strong&gt; de
-l’automatisation. C’est le sujet de l’article
+l’automatisation : un outil qui casse en silence est pire que pas d’outil du tout.
+C’est le sujet de l’article
 &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;automatisation&#x2F;pourquoi-vos-scripts-cassent&#x2F;&quot;&gt;Pourquoi vos scripts cassent&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 </content>
         

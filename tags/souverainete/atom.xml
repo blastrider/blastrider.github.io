@@ -8,7 +8,7 @@
     <updated>2026-06-19T00:00:00+00:00</updated>
     <id>https://ferrix.fr/tags/souverainete/atom.xml</id>
     <entry xml:lang="fr">
-        <title>Garantir qu&#x27;une donnée confidentielle ne parte jamais au cloud — par le code, pas par une option</title>
+        <title>Garantir qu&#x27;une donnée confidentielle ne parte jamais au cloud : par le code, pas par une option</title>
         <published>2026-06-19T00:00:00+00:00</published>
         <updated>2026-06-19T00:00:00+00:00</updated>
         
@@ -23,14 +23,14 @@
         <link rel="alternate" type="text/html" href="https://ferrix.fr/blog/ia-personnelle/donnee-confidentielle-jamais-cloud-par-le-code/"/>
         <id>https://ferrix.fr/blog/ia-personnelle/donnee-confidentielle-jamais-cloud-par-le-code/</id>
         
-        <content type="html" xml:base="https://ferrix.fr/blog/ia-personnelle/donnee-confidentielle-jamais-cloud-par-le-code/">&lt;p&gt;&lt;strong&gt;TL;DR&lt;&#x2F;strong&gt; — Dans Aliénor, une donnée marquée &lt;em&gt;confidentielle&lt;&#x2F;em&gt; ne peut &lt;strong&gt;pas&lt;&#x2F;strong&gt;
+        <content type="html" xml:base="https://ferrix.fr/blog/ia-personnelle/donnee-confidentielle-jamais-cloud-par-le-code/">&lt;p&gt;&lt;strong&gt;TL;DR&lt;&#x2F;strong&gt; : Dans Aliénor, une donnée marquée &lt;em&gt;confidentielle&lt;&#x2F;em&gt; ne peut &lt;strong&gt;pas&lt;&#x2F;strong&gt;
 partir vers un modèle cloud. Ce n’est pas une case à cocher qu’on pourrait oublier
 de cocher : c’est une règle inscrite dans le code, vérifiée à chaque appel, avec un
 comportement &lt;em&gt;fail-safe&lt;&#x2F;em&gt; (en cas de doute, on classe au plus restrictif) et un
 journal d’audit infalsifiable. Cet article montre les extraits réels qui le
-prouvent — pas du pseudo-code.&lt;&#x2F;p&gt;
+prouvent, pas du pseudo-code.&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;&#x2F;strong&gt; — Aliénor est mon projet personnel et un véhicule d’apprentissage, pas
+&lt;p&gt;&lt;strong&gt;Note&lt;&#x2F;strong&gt; : Aliénor est mon projet personnel et un véhicule d’apprentissage, pas
 un produit. Mais les principes décrits ici sont directement transposables aux
 outils métier que je construis pour des entreprises.&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
@@ -38,16 +38,16 @@ outils métier que je construis pour des entreprises.&lt;&#x2F;p&gt;
 &lt;p&gt;La plupart des assistants IA gèrent la confidentialité par configuration : un
 réglage, une politique, une promesse. Le souci, c’est qu’une option peut être mal
 réglée, oubliée, ou contournée par un chemin de code qu’on n’avait pas prévu. Pour
-des données soumises au RGPD — dossiers clients, code source d’entreprise, clés —
+des données soumises au RGPD (dossiers clients, code source d’entreprise, clés),
 ça ne suffit pas.&lt;&#x2F;p&gt;
 &lt;p&gt;C’est exactement la contrainte posée noir sur blanc dans la décision d’architecture
 qui fonde le modèle (&lt;code&gt;docs&#x2F;adr&#x2F;0004-confidentialite-3-niveaux.md&lt;&#x2F;code&gt;) :&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;« Maxime utilise Claude.ai manuellement aujourd’hui — sans garde-fou, Aliénor
+&lt;p&gt;&lt;em&gt;« Maxime utilise Claude.ai manuellement aujourd’hui ; sans garde-fou, Aliénor
 pourrait envoyer vers le cloud des données qu’il n’enverrait jamais à la main. »&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
 &lt;p&gt;La réponse n’est pas une option de configuration. C’est un &lt;strong&gt;type&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;etape-1-la-confidentialite-est-un-type-pas-un-booleen&quot;&gt;Étape 1 — La confidentialité est un type, pas un booléen&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;etape-1-la-confidentialite-est-un-type-pas-un-booleen&quot;&gt;Étape 1 : La confidentialité est un type, pas un booléen&lt;&#x2F;h2&gt;
 &lt;p&gt;Le niveau de confidentialité est un &lt;code&gt;enum&lt;&#x2F;code&gt; ordonné, défini dans le cœur métier
 (&lt;code&gt;crates&#x2F;alienor-domain&#x2F;src&#x2F;confidentiality.rs&lt;&#x2F;code&gt;) :&lt;&#x2F;p&gt;
 &lt;pre&gt;&lt;code data-lang=&quot;rust&quot;&gt;&#x2F;&#x2F;&#x2F; Three-level confidentiality model.
@@ -59,15 +59,15 @@ pub enum ConfidentialityLevel {
 }
 &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Trois niveaux, &lt;strong&gt;ordonnés&lt;&#x2F;strong&gt; : &lt;code&gt;Public &amp;lt; Internal &amp;lt; Confidential&lt;&#x2F;code&gt;. Cet ordre n’est
-pas décoratif — il permet de comparer des niveaux et de toujours retenir le plus
+pas décoratif : il permet de comparer des niveaux et de toujours retenir le plus
 strict.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;etape-2-le-fail-safe-en-cas-de-doute-le-plus-restrictif&quot;&gt;Étape 2 — Le &lt;em&gt;fail-safe&lt;&#x2F;em&gt; : en cas de doute, le plus restrictif&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;etape-2-le-fail-safe-en-cas-de-doute-le-plus-restrictif&quot;&gt;Étape 2 : Le &lt;em&gt;fail-safe&lt;&#x2F;em&gt;, en cas de doute, le plus restrictif&lt;&#x2F;h2&gt;
 &lt;p&gt;Voici le détail qui fait la différence entre « sûr sur le papier » et « sûr en
 vrai ». Quand un niveau est relu depuis le stockage et qu’il est illisible ou
-inconnu, le code ne plante pas et ne choisit pas « public » par défaut — il
+inconnu, le code ne plante pas et ne choisit pas « public » par défaut : il
 retombe sur &lt;strong&gt;&lt;code&gt;Confidential&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt; :&lt;&#x2F;p&gt;
 &lt;pre&gt;&lt;code data-lang=&quot;rust&quot;&gt;&#x2F;&#x2F;&#x2F; Inverse of `ordinal`. Unknown values fail closed to
-&#x2F;&#x2F;&#x2F; `Confidential` (the most restrictive — never leak by mis-decode).
+&#x2F;&#x2F;&#x2F; `Confidential` (the most restrictive - never leak by mis-decode).
 pub fn from_ordinal(n: u8) -&amp;gt; Self {
     match n {
         0 =&amp;gt; Self::Public,
@@ -78,8 +78,8 @@ pub fn from_ordinal(n: u8) -&amp;gt; Self {
 &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;C’est le principe du &lt;em&gt;fail closed&lt;&#x2F;em&gt; : une erreur de décodage ne peut jamais
 &lt;em&gt;déclasser&lt;&#x2F;em&gt; une donnée vers un niveau moins protégé. Le pire cas, c’est de
-sur-protéger — jamais de fuiter.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;etape-3-l-invariant-confidentiel-local-uniquement-toujours&quot;&gt;Étape 3 — L’invariant : « confidentiel → local uniquement, toujours »&lt;&#x2F;h2&gt;
+sur-protéger, jamais de fuiter.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;etape-3-l-invariant-confidentiel-local-uniquement-toujours&quot;&gt;Étape 3 : L’invariant « confidentiel → local uniquement, toujours »&lt;&#x2F;h2&gt;
 &lt;p&gt;Le routeur, qui décide quel modèle (local ou cloud) traite une requête, applique
 une règle unique et non contournable (&lt;code&gt;crates&#x2F;alienor-router&#x2F;src&#x2F;policy.rs&lt;&#x2F;code&gt;) :&lt;&#x2F;p&gt;
 &lt;pre&gt;&lt;code data-lang=&quot;rust&quot;&gt;pub fn validate_confidentiality(
@@ -99,9 +99,9 @@ une règle unique et non contournable (&lt;code&gt;crates&#x2F;alienor-router&#x
 }
 &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;Si la donnée est &lt;code&gt;Confidential&lt;&#x2F;code&gt; &lt;strong&gt;et&lt;&#x2F;strong&gt; que le fournisseur n’est pas local, la
-requête est &lt;strong&gt;refusée&lt;&#x2F;strong&gt; — elle renvoie une erreur &lt;code&gt;ConfidentialityViolation&lt;&#x2F;code&gt;. Il
+requête est &lt;strong&gt;refusée&lt;&#x2F;strong&gt; : elle renvoie une erreur &lt;code&gt;ConfidentialityViolation&lt;&#x2F;code&gt;. Il
 n’y a pas de branche « sauf si… » : c’est une porte fermée.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;etape-4-la-porte-est-franchie-avant-tout-le-reste&quot;&gt;Étape 4 — La porte est franchie &lt;em&gt;avant&lt;&#x2F;em&gt; tout le reste&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;etape-4-la-porte-est-franchie-avant-tout-le-reste&quot;&gt;Étape 4 : La porte est franchie &lt;em&gt;avant&lt;&#x2F;em&gt; tout le reste&lt;&#x2F;h2&gt;
 &lt;p&gt;Un garde-fou ne vaut que s’il est impossible de le sauter. Dans le chemin
 d’exécution du routeur (&lt;code&gt;crates&#x2F;alienor-router&#x2F;src&#x2F;router&#x2F;execute.rs&lt;&#x2F;code&gt;), le contrôle
 de confidentialité est l’&lt;strong&gt;étape 2&lt;&#x2F;strong&gt;, juste après la résolution du fournisseur et
@@ -117,9 +117,9 @@ self.policy
 &lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;L’ordre compte : le &lt;code&gt;?&lt;&#x2F;code&gt; après la vérification stoppe net toute requête en
 violation &lt;strong&gt;avant&lt;&#x2F;strong&gt; qu’aucun octet ne puisse partir. Et on note au passage que le
-cache sémantique lui-même est sauté pour les données confidentielles — pas de fuite
+cache sémantique lui-même est sauté pour les données confidentielles : pas de fuite
 indirecte par un cache partagé.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;etape-5-et-on-peut-le-prouver-apres-coup&quot;&gt;Étape 5 — Et on peut le prouver après coup&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;etape-5-et-on-peut-le-prouver-apres-coup&quot;&gt;Étape 5 : Et on peut le prouver après coup&lt;&#x2F;h2&gt;
 &lt;p&gt;Garantir, c’est bien. Pouvoir vérifier &lt;em&gt;a posteriori&lt;&#x2F;em&gt;, c’est mieux. Chaque action
 est inscrite dans un journal d’audit &lt;strong&gt;chaîné par hachage SHA-256&lt;&#x2F;strong&gt;
 (&lt;code&gt;crates&#x2F;alienor-memory&#x2F;src&#x2F;audit_store&#x2F;hash.rs&lt;&#x2F;code&gt;) :&lt;&#x2F;p&gt;
@@ -134,23 +134,23 @@ lignes suivantes, et la vérification le détecte. On ne peut pas réécrire l�
 discrètement.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;pourquoi-le-coeur-metier-est-pur&quot;&gt;Pourquoi le cœur métier est « pur »&lt;&#x2F;h2&gt;
 &lt;p&gt;Si ces règles tiennent, c’est aussi parce qu’elles vivent dans une couche qui ne
-dépend de rien d’externe. La crate &lt;code&gt;alienor-domain&lt;&#x2F;code&gt; — où sont définis le type de
-confidentialité et les contrats — ne tire qu’une poignée de dépendances &lt;em&gt;de
+dépend de rien d’externe. La crate &lt;code&gt;alienor-domain&lt;&#x2F;code&gt; (où sont définis le type de
+confidentialité et les contrats) ne tire qu’une poignée de dépendances &lt;em&gt;de
 données&lt;&#x2F;em&gt; (&lt;code&gt;uuid&lt;&#x2F;code&gt;, &lt;code&gt;chrono&lt;&#x2F;code&gt;, &lt;code&gt;serde&lt;&#x2F;code&gt;, &lt;code&gt;thiserror&lt;&#x2F;code&gt;). &lt;strong&gt;Aucun&lt;&#x2F;strong&gt; client réseau, aucune
 base de données, aucun runtime. Le réseau ne peut littéralement pas être invoqué
 depuis l’endroit qui définit la règle.&lt;&#x2F;p&gt;
 &lt;p&gt;C’est ce qui distingue une garantie d’une intention : la règle est définie là où il
 est &lt;em&gt;impossible&lt;&#x2F;em&gt; d’appeler le cloud, et appliquée à la seule frontière qui, elle,
 le peut.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;a-l-echelle-58-crates-101-decisions-documentees&quot;&gt;À l’échelle : 58 crates, 101 décisions documentées&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;a-l-echelle-58-crates-une-centaine-de-decisions-documentees&quot;&gt;À l’échelle : 58 crates, une centaine de décisions documentées&lt;&#x2F;h2&gt;
 &lt;p&gt;Ce niveau de rigueur n’est pas un cas isolé. Aliénor est un workspace Cargo de
 &lt;strong&gt;58 crates&lt;&#x2F;strong&gt; (une responsabilité par crate), et chaque choix structurant est tracé
-dans une &lt;strong&gt;décision d’architecture&lt;&#x2F;strong&gt; numérotée — il y en a aujourd’hui &lt;strong&gt;101&lt;&#x2F;strong&gt;
-(&lt;code&gt;docs&#x2F;adr&#x2F;0001&lt;&#x2F;code&gt; à &lt;code&gt;0101&lt;&#x2F;code&gt;). L’invariant de confidentialité décrit ici, c’est
+dans une &lt;strong&gt;décision d’architecture&lt;&#x2F;strong&gt; numérotée : il y en a aujourd’hui &lt;strong&gt;une
+centaine&lt;&#x2F;strong&gt; (&lt;code&gt;docs&#x2F;adr&#x2F;0001&lt;&#x2F;code&gt; à &lt;code&gt;0101&lt;&#x2F;code&gt;). L’invariant de confidentialité décrit ici, c’est
 l’ADR-0004. La nature non-contournable n’est pas un effet du hasard : c’est une
 décision écrite, datée et revue.&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;À retenir&lt;&#x2F;strong&gt; — La souveraineté des données ne se promet pas, elle se construit.
+&lt;p&gt;&lt;strong&gt;À retenir&lt;&#x2F;strong&gt; : La souveraineté des données ne se promet pas, elle se construit.
 La différence entre « on fait attention » et « c’est impossible de se tromper »
 tient dans l’architecture : un type plutôt qu’un booléen, un garde-fou placé
 avant l’action plutôt qu’après, un fail-safe vers le plus strict, et un audit
@@ -178,7 +178,7 @@ toute action la rend non contournable : le compilateur et le contrôle d’exéc
 font le travail à la place de la vigilance humaine.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;que-se-passe-t-il-si-le-niveau-de-confidentialite-est-corrompu-en-base&quot;&gt;Que se passe-t-il si le niveau de confidentialité est corrompu en base ?&lt;&#x2F;h3&gt;
 &lt;p&gt;Le décodage retombe sur &lt;code&gt;Confidential&lt;&#x2F;code&gt;, le niveau le plus restrictif. Une donnée
-illisible est donc traitée comme sensible — jamais l’inverse. C’est le principe du
+illisible est donc traitée comme sensible, jamais l’inverse. C’est le principe du
 &lt;em&gt;fail closed&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;le-cloud-est-il-completement-interdit&quot;&gt;Le cloud est-il complètement interdit ?&lt;&#x2F;h3&gt;
 &lt;p&gt;Non : les données &lt;code&gt;Public&lt;&#x2F;code&gt; peuvent être routées vers le cloud quand la qualité le
@@ -189,8 +189,8 @@ justifie. C’est tout l’intérêt d’un modèle à trois niveaux plutôt que
 chaque action est enregistré. Toute altération du journal casse la chaîne de
 hachage et devient détectable.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;peut-on-appliquer-ca-a-un-outil-d-entreprise-plus-simple&quot;&gt;Peut-on appliquer ça à un outil d’entreprise plus simple ?&lt;&#x2F;h3&gt;
-&lt;p&gt;Oui. Les principes — protection par le code, défaut le plus sûr, garde-fou avant
-l’action, audit infalsifiable — ne dépendent pas de la taille du projet.
+&lt;p&gt;Oui. Les principes (protection par le code, défaut le plus sûr, garde-fou avant
+l’action, audit infalsifiable) ne dépendent pas de la taille du projet.
 &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;#contact&quot;&gt;Décrivez votre besoin&lt;&#x2F;a&gt; et on regarde ensemble ce qui
 est pertinent pour votre cas.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;pour-aller-plus-loin&quot;&gt;Pour aller plus loin&lt;&#x2F;h2&gt;
@@ -201,7 +201,7 @@ ou lisez &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;ia-personne
         
     </entry>
     <entry xml:lang="fr">
-        <title>J&#x27;ai construit ma propre IA personnelle en Rust — pourquoi et comment</title>
+        <title>J&#x27;ai construit ma propre IA personnelle en Rust : pourquoi et comment</title>
         <published>2026-06-18T00:00:00+00:00</published>
         <updated>2026-06-18T00:00:00+00:00</updated>
         
@@ -216,18 +216,18 @@ ou lisez &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;ia-personne
         <link rel="alternate" type="text/html" href="https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/"/>
         <id>https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/</id>
         
-        <content type="html" xml:base="https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/">&lt;p&gt;&lt;strong&gt;TL;DR&lt;&#x2F;strong&gt; — J’ai conçu &lt;em&gt;Aliénor&lt;&#x2F;em&gt;, une IA personnelle écrite en Rust, qui tourne
+        <content type="html" xml:base="https://ferrix.fr/blog/ia-personnelle/ia-personnelle-rust-pourquoi-comment/">&lt;p&gt;&lt;strong&gt;TL;DR&lt;&#x2F;strong&gt; : J’ai conçu &lt;em&gt;Aliénor&lt;&#x2F;em&gt;, une IA personnelle écrite en Rust, qui tourne
 par défaut en local (sur ma propre machine) et ne fait appel au cloud que lorsque
 la qualité l’exige &lt;strong&gt;et&lt;&#x2F;strong&gt; que la confidentialité le permet. Elle a une mémoire
 long-terme, peut agir sur le système sous garde-fous, et n’est pas un simple
-habillage de ChatGPT. Cet article explique pourquoi un tel projet a du sens — et
+habillage de ChatGPT. Cet article explique pourquoi un tel projet a du sens, et
 ce que les PME, TPE et indépendants peuvent en retenir pour leurs propres outils.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;pourquoi-ne-pas-se-contenter-d-un-abonnement-chatgpt&quot;&gt;Pourquoi ne pas se contenter d’un abonnement ChatGPT ?&lt;&#x2F;h2&gt;
 &lt;p&gt;La réponse courte : &lt;strong&gt;la dépendance et la confidentialité&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;Un assistant IA grand public, c’est un abonnement mensuel par utilisateur, des
 données envoyées sur des serveurs étrangers, et des conditions qui changent sans
 préavis. Pour un usage personnel anodin, peu importe. Mais dès qu’on manipule de
-l’information sensible — un dossier client, un contrat, des données RH — la
+l’information sensible (un dossier client, un contrat, des données RH), la
 question devient sérieuse : &lt;em&gt;où vont vraiment ces données, et qui peut les lire ?&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Aliénor part d’un principe inverse : &lt;strong&gt;le local d’abord&lt;&#x2F;strong&gt;. Le modèle tourne sur
 ma machine, les données restent chez moi, et rien ne part vers un service tiers
@@ -236,7 +236,7 @@ sans une raison explicite.&lt;&#x2F;p&gt;
 &lt;p&gt;C’est exactement la problématique que rencontrent beaucoup de PME et d’indépendants.
 Un outil métier qui envoie tout sur un cloud propriétaire vous rend captif : du
 tarif, de la disponibilité du service, et de la politique de confidentialité du
-fournisseur. Construire — ou faire construire — un outil souverain, c’est reprendre
+fournisseur. Construire (ou faire construire) un outil souverain, c’est reprendre
 la main. C’est le même fil rouge que dans la
 &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;ia-personnelle&#x2F;&quot;&gt;présentation de cette série&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;hybride-local-cloud-ne-pas-choisir-entre-confidentialite-et-qualite&quot;&gt;Hybride local&#x2F;cloud : ne pas choisir entre confidentialité et qualité&lt;&#x2F;h2&gt;
@@ -248,7 +248,7 @@ option de configuration&lt;&#x2F;strong&gt; : une donnée marquée &lt;code&gt;C
 cloud. Le routage choisit le modèle local par défaut, et ne bascule vers un
 fournisseur cloud que si la tâche le justifie &lt;em&gt;et&lt;&#x2F;em&gt; que la donnée n’est pas sensible.&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;À retenir&lt;&#x2F;strong&gt; — La confidentialité ne doit pas être une case à cocher qu’on peut
+&lt;p&gt;&lt;strong&gt;À retenir&lt;&#x2F;strong&gt; : La confidentialité ne doit pas être une case à cocher qu’on peut
 oublier de cocher. Dans un outil bien conçu, c’est une &lt;em&gt;garantie structurelle&lt;&#x2F;em&gt; :
 le code rend l’erreur impossible, plutôt que de compter sur la vigilance de
 l’utilisateur.&lt;&#x2F;p&gt;
@@ -257,21 +257,21 @@ l’utilisateur.&lt;&#x2F;p&gt;
 &lt;p&gt;Un assistant sans mémoire repart de zéro à chaque conversation. Aliénor dispose
 d’une &lt;strong&gt;mémoire long-terme&lt;&#x2F;strong&gt; : elle se souvient des échanges passés, des préférences,
 des décisions prises. Techniquement, cela repose sur une base locale (SQLite),
-des &lt;em&gt;embeddings&lt;&#x2F;em&gt; pour la recherche par similarité, et une consolidation périodique
-en arrière-plan.&lt;&#x2F;p&gt;
+des &lt;em&gt;embeddings&lt;&#x2F;em&gt; pour la recherche par similarité, et une consolidation qui
+s’exécute en arrière-plan pour résumer et ranger les souvenirs anciens.&lt;&#x2F;p&gt;
 &lt;p&gt;Pour une entreprise, l’équivalent serait un assistant qui connaît vos dossiers
-récurrents, vos process internes, le vocabulaire de votre métier — sans qu’on ait
+récurrents, vos process internes, le vocabulaire de votre métier, sans qu’on ait
 à tout lui réexpliquer chaque matin.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;une-ia-qui-agit-mais-sous-garde-fous&quot;&gt;Une IA qui agit — mais sous garde-fous&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;une-ia-qui-agit-mais-sous-garde-fous&quot;&gt;Une IA qui agit, mais sous garde-fous&lt;&#x2F;h2&gt;
 &lt;p&gt;Le vrai saut, ce n’est pas de répondre à des questions : c’est d’&lt;strong&gt;agir&lt;&#x2F;strong&gt;. Lire
 l’état d’un système, éditer un fichier, lancer une commande. Aliénor en est
 capable, mais chaque action passe par trois filets de sécurité :&lt;&#x2F;p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Dry-run d’abord&lt;&#x2F;strong&gt; — l’IA &lt;em&gt;planifie&lt;&#x2F;em&gt; avant d’&lt;em&gt;appliquer&lt;&#x2F;em&gt;. La prévisualisation
+&lt;li&gt;&lt;strong&gt;Dry-run d’abord&lt;&#x2F;strong&gt; : l’IA &lt;em&gt;planifie&lt;&#x2F;em&gt; avant d’&lt;em&gt;appliquer&lt;&#x2F;em&gt;. La prévisualisation
 est garantie par le système de types, pas par une convention.&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Allow-lists et confirmation&lt;&#x2F;strong&gt; — certaines actions exigent une validation
+&lt;li&gt;&lt;strong&gt;Allow-lists et confirmation&lt;&#x2F;strong&gt; : certaines actions exigent une validation
 humaine explicite, hors d’atteinte de l’IA elle-même.&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Journal d’audit&lt;&#x2F;strong&gt; — tout est tracé de façon infalsifiable.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Journal d’audit&lt;&#x2F;strong&gt; : tout est tracé de façon infalsifiable.&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
 &lt;p&gt;C’est précisément ce qui sépare un outil d’automatisation &lt;em&gt;fiable&lt;&#x2F;em&gt; d’un script
 qui peut tout casser. Le même principe guide nos articles sur
@@ -289,7 +289,7 @@ dépendance lourde. On le déploie où on veut, on n’est captif de rien.&lt;&#
 construis pour des entreprises : pas de surprise silencieuse, pas de dépendance
 imposée.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;ce-qu-une-pme-ou-un-independant-peut-en-retenir&quot;&gt;Ce qu’une PME ou un indépendant peut en retenir&lt;&#x2F;h2&gt;
-&lt;p&gt;Aliénor est un projet &lt;em&gt;personnel&lt;&#x2F;em&gt; et un véhicule d’apprentissage — pas un produit.
+&lt;p&gt;Aliénor est un projet &lt;em&gt;personnel&lt;&#x2F;em&gt; et un véhicule d’apprentissage, pas un produit.
 Mais les principes qu’il illustre sont directement transposables :&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;La souveraineté des données est un choix d’architecture&lt;&#x2F;strong&gt;, pas une promesse
@@ -298,14 +298,14 @@ marketing.&lt;&#x2F;li&gt;
 à vous adapter à lui.&lt;&#x2F;li&gt;
 &lt;li&gt;&lt;strong&gt;La fiabilité se construit dans le code&lt;&#x2F;strong&gt;, pas dans la documentation.&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;p&gt;Si l’un de ces sujets résonne avec un besoin réel de votre entreprise — un outil
-interne, une automatisation, un assistant qui ne fait pas fuiter vos données —
+&lt;p&gt;Si l’un de ces sujets résonne avec un besoin réel de votre entreprise (un outil
+interne, une automatisation, un assistant qui ne fait pas fuiter vos données),
 c’est précisément le genre de problème que j’aide à résoudre.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;faq&quot;&gt;FAQ&lt;&#x2F;h2&gt;
 &lt;h3 id=&quot;une-ia-locale-c-est-realiste-pour-une-petite-entreprise&quot;&gt;Une IA locale, c’est réaliste pour une petite entreprise ?&lt;&#x2F;h3&gt;
 &lt;p&gt;Oui, à condition de calibrer les attentes. Un modèle local ne remplace pas un
 gros modèle cloud sur toutes les tâches, mais il couvre très bien les usages
-récurrents et sensibles — au prix d’aucune fuite de données et sans abonnement
+récurrents et sensibles, au prix d’aucune fuite de données et sans abonnement
 par utilisateur.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;faut-il-du-materiel-couteux&quot;&gt;Faut-il du matériel coûteux ?&lt;&#x2F;h3&gt;
 &lt;p&gt;Pas nécessairement. Aliénor est pensée pour tourner sur du matériel modeste (une
@@ -321,8 +321,8 @@ l’exécution.&lt;&#x2F;p&gt;
 confidentielle ne quitte jamais la machine, et cette garantie est imposée par le
 code lui-même, pas par un réglage qu’on peut oublier.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;comment-demarrer-un-projet-d-outil-souverain-dans-mon-entreprise&quot;&gt;Comment démarrer un projet d’outil souverain dans mon entreprise ?&lt;&#x2F;h3&gt;
-&lt;p&gt;En partant d’un problème concret et borné — une tâche répétitive, un besoin
-d’assistant sur un domaine précis — plutôt que d’un grand projet « IA » abstrait.
+&lt;p&gt;En partant d’un problème concret et borné (une tâche répétitive, un besoin
+d’assistant sur un domaine précis) plutôt que d’un grand projet « IA » abstrait.
 &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;#contact&quot;&gt;Décrivez votre besoin&lt;&#x2F;a&gt; et on évalue ensemble si c’est
 pertinent.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;pour-aller-plus-loin&quot;&gt;Pour aller plus loin&lt;&#x2F;h2&gt;

@@ -23,27 +23,56 @@
         <link rel="alternate" type="text/html" href="https://ferrix.fr/blog/automatisation/pourquoi-vos-scripts-cassent/"/>
         <id>https://ferrix.fr/blog/automatisation/pourquoi-vos-scripts-cassent/</id>
         
-        <content type="html" xml:base="https://ferrix.fr/blog/automatisation/pourquoi-vos-scripts-cassent/">&lt;p&gt;Un script qui marche le jour où on l’écrit n’est pas un script fiable. La vraie
-question, c’est : que se passe-t-il dans six mois, quand le fichier source change
-de format et que personne ne s’en souvient ?&lt;&#x2F;p&gt;
+        <content type="html" xml:base="https://ferrix.fr/blog/automatisation/pourquoi-vos-scripts-cassent/">&lt;p&gt;Un script qui marche le jour où on l’écrit n’est pas un script fiable. C’est juste
+un script qui n’a pas encore rencontré le cas qui le fera tomber. La vraie
+question n’est pas « est-ce que ça marche ? » mais : que se passe-t-il dans six
+mois, quand le fichier source change discrètement de format et que personne ne se
+souvient de l’avoir écrit ?&lt;&#x2F;p&gt;
+&lt;p&gt;C’est presque toujours à ce moment-là, et pas avant, qu’on découvre qu’un script
+était fragile.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;les-trois-causes-classiques-de-casse&quot;&gt;Les trois causes classiques de casse&lt;&#x2F;h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Hypothèses implicites&lt;&#x2F;strong&gt; — le script suppose qu’une colonne est toujours à la
-même place, qu’un fichier existe toujours, qu’un réseau répond toujours.&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Échec silencieux&lt;&#x2F;strong&gt; — en cas d’erreur, le script continue comme si de rien
-n’était et produit un résultat faux.&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Aucune trace&lt;&#x2F;strong&gt; — quand ça casse, impossible de savoir pourquoi.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Hypothèses implicites&lt;&#x2F;strong&gt; : le script suppose qu’une colonne est toujours à la
+même place, qu’un fichier existe toujours, qu’un réseau répond toujours. Le jour
+où le fournisseur ajoute une colonne ou renomme un champ, tout décale sans
+prévenir.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Échec silencieux&lt;&#x2F;strong&gt; : en cas d’erreur, le script continue comme si de rien
+n’était et produit un résultat faux. C’est le pire des cas, parce que le
+problème ne se voit pas tout de suite.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Aucune trace&lt;&#x2F;strong&gt; : quand ça casse, impossible de savoir &lt;em&gt;quand&lt;&#x2F;em&gt;, &lt;em&gt;pourquoi&lt;&#x2F;em&gt;, ni
+&lt;em&gt;quelles données&lt;&#x2F;em&gt; ont été touchées. On rejoue à l’aveugle.&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;un-scenario-typique&quot;&gt;Un scénario typique&lt;&#x2F;h2&gt;
+&lt;p&gt;Un script lit un export CSV chaque matin et met à jour un tableau de bord. Pendant
+un an, tout va bien. Puis l’outil qui génère l’export passe les montants de
+&lt;code&gt;1234.50&lt;&#x2F;code&gt; à &lt;code&gt;1 234,50&lt;&#x2F;code&gt; (espace et virgule). Le script ne plante pas : il lit
+« 1 » comme un nombre, ignore le reste, et le tableau de bord affiche des chiffres
+faux pendant trois semaines. Personne ne s’en rend compte avant la clôture
+mensuelle. Le bug n’était pas dans le code ; il était dans une &lt;strong&gt;hypothèse jamais
+écrite&lt;&#x2F;strong&gt; sur le format des données.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;ce-qui-rend-un-outil-robuste&quot;&gt;Ce qui rend un outil robuste&lt;&#x2F;h2&gt;
-&lt;p&gt;Un outil d’automatisation fiable &lt;strong&gt;valide ses entrées&lt;&#x2F;strong&gt;, &lt;strong&gt;gère explicitement les
-erreurs&lt;&#x2F;strong&gt;, &lt;strong&gt;journalise&lt;&#x2F;strong&gt; ce qu’il fait, et &lt;strong&gt;s’arrête proprement&lt;&#x2F;strong&gt; plutôt que de
-produire des données fausses. C’est exactement là que des langages comme Rust
-apportent une garantie supplémentaire : beaucoup d’erreurs sont détectées avant
-même l’exécution.&lt;&#x2F;p&gt;
+&lt;p&gt;Un outil d’automatisation fiable fait quatre choses qu’un script bricolé néglige :&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Il valide ses entrées&lt;&#x2F;strong&gt; avant de les traiter, au lieu de leur faire confiance.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Il gère explicitement les erreurs&lt;&#x2F;strong&gt; : chaque cas qui peut mal tourner est
+prévu et traité.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Il journalise&lt;&#x2F;strong&gt; ce qu’il fait, pour qu’on puisse reconstituer l’historique.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Il s’arrête proprement&lt;&#x2F;strong&gt; plutôt que de produire des données fausses : mieux
+vaut une alerte « je n’ai pas pu » qu’un résultat erroné présenté comme correct.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;C’est exactement là que des langages comme Rust apportent une garantie
+supplémentaire : beaucoup d’erreurs (un champ manquant, un type qui ne correspond
+pas, un cas non traité) sont détectées &lt;strong&gt;à la compilation&lt;&#x2F;strong&gt;, avant même que
+l’outil ne tourne sur de vraies données. Le script fragile, lui, ne découvre le
+problème qu’en production.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;le-cout-cache-des-scripts-fragiles&quot;&gt;Le coût caché des scripts fragiles&lt;&#x2F;h2&gt;
-&lt;p&gt;Un script qui échoue en silence coûte bien plus cher qu’un outil robuste : données
-corrompues, confiance perdue, temps passé à déboguer dans l’urgence. Pour la vue
-d’ensemble du sujet, retournez à la
+&lt;p&gt;Sur le papier, un script bricolé en une après-midi coûte moins cher qu’un outil
+soigné. En pratique, c’est l’inverse dès qu’il casse : données corrompues à
+ressaisir, décisions prises sur de faux chiffres, confiance perdue dans l’outil,
+et des heures passées à déboguer dans l’urgence un code que plus personne ne
+comprend. La robustesse n’est pas un luxe d’ingénieur : c’est ce qui fait qu’un
+outil vous fait gagner du temps sur la durée au lieu de vous en coûter.&lt;&#x2F;p&gt;
+&lt;p&gt;Pour la vue d’ensemble du sujet, retournez à la
 &lt;a href=&quot;https:&#x2F;&#x2F;ferrix.fr&#x2F;blog&#x2F;automatisation&#x2F;&quot;&gt;page pilier Automatisation&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;pour-aller-plus-loin&quot;&gt;Pour aller plus loin&lt;&#x2F;h2&gt;
 &lt;p&gt;Avant d’investir dans un outil robuste, assurez-vous d’automatiser la bonne tâche :
