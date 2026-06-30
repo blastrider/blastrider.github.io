@@ -2,7 +2,7 @@
 title = "Pourquoi vos scripts d'automatisation cassent (et comment l'éviter)"
 description = "Les scripts bricolés échouent en silence dès qu'un fichier change. Voici ce qui distingue un outil d'automatisation robuste d'un script fragile."
 date = 2026-06-15
-updated = 2026-06-15
+updated = 2026-06-30
 
 [taxonomies]
 tags = ["automatisation", "fiabilité", "rust"]

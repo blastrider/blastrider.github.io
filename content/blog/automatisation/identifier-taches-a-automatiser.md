@@ -2,7 +2,7 @@
 title = "Comment identifier les tâches à automatiser en priorité dans votre entreprise"
 description = "Méthode simple pour repérer les tâches répétitives qui méritent d'être automatisées en premier, en fonction du temps gagné et du risque d'erreur."
 date = 2026-06-10
-updated = 2026-06-10
+updated = 2026-06-30
 
 [taxonomies]
 tags = ["automatisation", "pme", "méthode"]
