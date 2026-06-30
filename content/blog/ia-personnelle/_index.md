@@ -10,7 +10,7 @@ transparent = false
 eyebrow = "IA personnelle"
 silo_color = "#ff7640"
 is_pillar = true
-intro = "Et si votre entreprise pouvait disposer d'un assistant IA qui ne fait jamais fuiter ses données vers un cloud tiers, qui se souvient de vos dossiers et qui s'adapte exactement à votre métier ? Ces articles documentent la construction d'Aliénor, une IA personnelle écrite en Rust — et ce que les dirigeants de PME, TPE et indépendants peuvent en tirer concrètement."
+intro = "Et si votre entreprise pouvait disposer d'un assistant IA qui ne fait jamais fuiter ses données vers un cloud tiers, qui se souvient de vos dossiers et qui s'adapte exactement à votre métier ? Ces articles documentent la construction d'Aliénor, une IA personnelle écrite en Rust, et ce que les dirigeants de PME, TPE et indépendants peuvent en tirer concrètement."
 +++
 
 ## Pourquoi une IA « à soi » plutôt qu'un abonnement ChatGPT
@@ -18,7 +18,7 @@ intro = "Et si votre entreprise pouvait disposer d'un assistant IA qui ne fait j
 La plupart des assistants IA grand public envoient vos données sur des serveurs
 que vous ne contrôlez pas, facturent un abonnement mensuel par utilisateur, et
 peuvent changer de tarif ou de conditions du jour au lendemain. Pour une
-information sensible — dossiers clients, données RH, secrets industriels — ce
+information sensible (dossiers clients, données RH, secrets industriels), ce
 modèle pose un vrai problème de **souveraineté**.
 
 ## Ce que rassemblent ces articles
@@ -26,7 +26,7 @@ modèle pose un vrai problème de **souveraineté**.
 Tout part d'un projet personnel concret, **Aliénor**, dont on tire des
 enseignements transposables à l'entreprise : faire tourner un modèle en local,
 garantir qu'une donnée confidentielle ne quitte jamais la machine, donner une
-mémoire long-terme à un assistant, et l'outiller pour qu'il agisse — sans jamais
+mémoire long-terme à un assistant, et l'outiller pour qu'il agisse, sans jamais
 perdre le contrôle.
 
 ## À qui s'adressent ces articles

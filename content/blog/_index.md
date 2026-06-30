@@ -1,5 +1,5 @@
 +++
-title = "Blog — Rust, automatisation et outils métier pour PME, TPE et indépendants"
+title = "Blog : Rust, automatisation et outils métier pour PME, TPE et indépendants"
 description = "Guides concrets sur le développement Rust sur mesure, l'automatisation de tâches et la reprise d'outils internes pour les petites entreprises et indépendants en France."
 sort_by = "date"
 template = "blog.html"
