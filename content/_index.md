@@ -3,6 +3,9 @@ title = "Ferrix — Développeur Rust freelance pour PME, TPE et indépendants"
 description = "Développeur Rust freelance : applications sur mesure, outils métier et automatisation pour les PME, TPE et indépendants en France. Code livré, documenté, sans dépendance."
 template = "index.html"
 
+[extra]
+blog_section_title = "Le blog"
+
 [extra.hero]
 eyebrow = "Développeur Rust freelance · PME, TPE & Indépendants"
 title = "Des logiciels sur mesure qui durent, sans dette technique ni dépendance"
